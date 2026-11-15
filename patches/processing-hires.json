@@ -1,0 +1,30 @@
+{
+  "description": "Scoped Hires, generation cleanup, and independent base/Hires close.",
+  "hunks": [
+    {
+      "description": "Only mark the Hires extra-network activation phase; preserve all unrelated processing code.",
+      "before": "            elif lowvram.is_enabled(shared.sd_model) and shared.sd_model.sd_checkpoint_info == sd_models.select_checkpoint():  # if in lowvram mode, we need to calculate conds right away, before the cond NN is unloaded\n                with devices.autocast():\n                    extra_networks.activate(self, self.hr_extra_network_data)\n\n",
+      "after": "            elif lowvram.is_enabled(shared.sd_model) and shared.sd_model.sd_checkpoint_info == sd_models.select_checkpoint():  # if in lowvram mode, we need to calculate conds right away, before the cond NN is unloaded\n                # Hires.extra-network tags are activated before ``is_hr_pass``\n                # flips in the low-VRAM path.  Make that pass explicit so\n                # extensions can select their Hires.fix-only values while the\n                # HR text conditioning is built.\n                self._extra_networks_is_hr_pass = True\n                try:\n                    with devices.autocast():\n                        extra_networks.activate(self, self.hr_extra_network_data)\n                finally:\n                    self._extra_networks_is_hr_pass = False\n\n"
+    },
+    {
+      "before": "    finally:\n        sd_models.apply_token_merging(p.sd_model, 0)\n        p.close()\n\n        # restore opts to original state\n        if p.override_settings_restore_afterwards:\n            for k, v in stored_opts.items():\n                setattr(opts, k, v)\n\n                if k == 'sd_vae':\n                    sd_vae.reload_vae_weights()\n\n    return res\n\n\n",
+      "after": "    finally:\n        cleanup_processing(p, stored_opts, primary_error=sys.exc_info()[1])\n\n    return res\n\n\ndef cleanup_processing(p, stored_opts, primary_error=None):\n    \"\"\"Attempt every cleanup without triggering lazy checkpoint loading.\"\"\"\n    failures = []\n\n    def attempt(action):\n        try:\n            action()\n        except Exception as error:\n            failures.append(error)\n            logging.exception(\"Error during generation cleanup\")\n\n    model = sd_models.model_data.sd_model\n    if model is not None:\n        attempt(lambda: sd_models.apply_token_merging(model, 0))\n    attempt(p.close)\n    if p.override_settings_restore_afterwards:\n        for key, value in stored_opts.items():\n            attempt(lambda key=key, value=value: setattr(opts, key, value))\n        if 'sd_vae' in stored_opts and model is not None:\n            attempt(sd_vae.reload_vae_weights)\n    if failures and primary_error is None:\n        raise failures[0]\n\n\n"
+    },
+    {
+      "before": "    def close(self):\n        self.sampler = None\n        self.c = None\n        self.uc = None\n        if hasattr(self, '_monkey_patcher') and self._monkey_patcher is not None:\n            self._monkey_patcher.unhook()\n            self._monkey_patcher = None\n        if hasattr(self, '_forge_shim') and self._forge_shim is not None:\n            self._forge_shim.unhook()\n            self._forge_shim = None\n        if not opts.persistent_cond_cache:\n            StableDiffusionProcessing.cached_c = [None, None]\n            StableDiffusionProcessing.cached_uc = [None, None]\n",
+      "after": "    def close(self):\n        self.sampler = None\n        self.c = None\n        self.uc = None\n        failures = []\n        for name in ('_monkey_patcher', '_forge_shim'):\n            patcher = getattr(self, name, None)\n            if patcher is None:\n                continue\n            try:\n                patcher.unhook()\n            except Exception as error:\n                # Retain a failed hook for diagnosis/retry, but still attempt\n                # the other independent unhook and clear conditioning below.\n                failures.append(error)\n            else:\n                setattr(self, name, None)\n        if not opts.persistent_cond_cache:\n            StableDiffusionProcessing.cached_c = [None, None]\n            StableDiffusionProcessing.cached_uc = [None, None]\n        if failures:\n            raise failures[0]\n"
+    },
+    {
+      "before": "    def close(self):\n        super().close()\n        self.hr_c = None\n        self.hr_uc = None\n        if not opts.persistent_cond_cache:\n            StableDiffusionProcessingTxt2Img.cached_hr_uc = [None, None]\n            StableDiffusionProcessingTxt2Img.cached_hr_c = [None, None]\n",
+      "after": "    def close(self):\n        try:\n            super().close()\n        finally:\n            self.hr_c = None\n            self.hr_uc = None\n            if not opts.persistent_cond_cache:\n                StableDiffusionProcessingTxt2Img.cached_hr_uc = [None, None]\n                StableDiffusionProcessingTxt2Img.cached_hr_c = [None, None]\n"
+    },
+    {
+      "before": "            opts.emphasis,\n        )",
+      "after": "            opts.emphasis,\n            model_hijack.embedding_db.revision,\n            getattr(shared.sd_model, 'lora_model_token', None),\n            getattr(shared.sd_model, 'lora_conditioning_signature', ()),\n        )"
+    },
+    {
+      "before": "        caches is a list with items described above.\n        \"\"\"\n\n        if shared.opts.use_old_scheduling:",
+      "after": "        caches is a list with items described above.\n        \"\"\"\n\n        model_hijack.embedding_db.ensure_model_compatibility()\n        if shared.opts.use_old_scheduling:"
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "plain-scalar",
+      "tag": "<lora:portrait:0.7>",
+      "serialized": "<lora:portrait:te=0.7:unet=0.7>",
+      "normalized": {
+        "schema_version": 1,
+        "tag_type": "lora",
+        "network_name": "portrait",
+        "weights": {"te": {"kind": "scalar", "value": 0.7}, "unet": {"kind": "scalar", "value": 0.7}},
+        "hires": {"te": null, "unet": null},
+        "dyn_dim": null,
+        "active_range": {"start": null, "stop": null},
+        "block_weights": null,
+        "elemental_weights": null,
+        "model_profile": "auto",
+        "passthrough_named": [],
+        "passthrough_positional": []
+      }
+    },
+    {
+      "id": "curve-inherits-to-unet",
+      "tag": "<lora:curve-inherit:0.2@0,0.8@1>",
+      "serialized": "<lora:curve-inherit:te=0.2@0,0.8@1:unet=0.2@0,0.8@1>",
+      "normalized": {
+        "schema_version": 1,
+        "tag_type": "lora",
+        "network_name": "curve-inherit",
+        "weights": {
+          "te": {"kind": "curve", "points": [{"position": 0.0, "value": 0.2}, {"position": 1.0, "value": 0.8}]},
+          "unet": {"kind": "curve", "points": [{"position": 0.0, "value": 0.2}, {"position": 1.0, "value": 0.8}]}
+        },
+        "hires": {"te": null, "unet": null},
+        "dyn_dim": null,
+        "active_range": {"start": null, "stop": null},
+        "block_weights": null,
+        "elemental_weights": null,
+        "model_profile": "auto",
+        "passthrough_named": [],
+        "passthrough_positional": []
+      }
+    },
+    {
+      "id": "loractl-curve-hires-and-unknown",
+      "tag": "<loractl:motion:0@0,1@1:unet=0.8:dyn=32:hr=0.4@0,0.9@1:step=0.2-0.8:lbw=OUTS:future=keep>",
+      "serialized": "<loractl:motion:te=0@0,1@1:unet=0.8:dyn=32:hrte=0.4@0,0.9@1:hrunet=0.4@0,0.9@1:start=0.2:stop=0.8:lbw=OUTS:future=keep>",
+      "normalized": {
+        "schema_version": 1,
+        "tag_type": "loractl",
+        "network_name": "motion",
+        "weights": {
+          "te": {"kind": "curve", "points": [{"position": 0.0, "value": 0.0}, {"position": 1.0, "value": 1.0}]},
+          "unet": {"kind": "scalar", "value": 0.8}
+        },
+        "hires": {
+          "te": {"kind": "curve", "points": [{"position": 0.0, "value": 0.4}, {"position": 1.0, "value": 0.9}]},
+          "unet": {"kind": "curve", "points": [{"position": 0.0, "value": 0.4}, {"position": 1.0, "value": 0.9}]}
+        },
+        "dyn_dim": 32,
+        "active_range": {"start": 0.2, "stop": 0.8},
+        "block_weights": {"raw": "OUTS"},
+        "elemental_weights": null,
+        "model_profile": "auto",
+        "passthrough_named": [{"name": "future", "value": "keep"}],
+        "passthrough_positional": []
+      }
+    },
+    {
+      "id": "lyco-profile-and-duplicate-unknown",
+      "tag": "<lyco:style:te=0.3:unet=0.6:profile=flux-61:custom=a:custom=b>",
+      "serialized": "<lyco:style:te=0.3:unet=0.6:profile=flux-61:custom=a:custom=b>",
+      "normalized": {
+        "schema_version": 1,
+        "tag_type": "lyco",
+        "network_name": "style",
+        "weights": {"te": {"kind": "scalar", "value": 0.3}, "unet": {"kind": "scalar", "value": 0.6}},
+        "hires": {"te": null, "unet": null},
+        "dyn_dim": null,
+        "active_range": {"start": null, "stop": null},
+        "block_weights": null,
+        "elemental_weights": null,
+        "model_profile": "flux-61",
+        "passthrough_named": [{"name": "custom", "value": "a"}, {"name": "custom", "value": "b"}],
+        "passthrough_positional": []
+      }
+    },
+    {
+      "id": "legacy-positionals-and-future-positional",
+      "tag": "<lora:legacy:0.5:0.75:16:future-pos:note=preserve>",
+      "serialized": "<lora:legacy:0.5:0.75:16:future-pos:note=preserve>",
+      "normalized": {
+        "schema_version": 1,
+        "tag_type": "lora",
+        "network_name": "legacy",
+        "weights": {"te": {"kind": "scalar", "value": 0.5}, "unet": {"kind": "scalar", "value": 0.75}},
+        "hires": {"te": null, "unet": null},
+        "dyn_dim": 16,
+        "active_range": {"start": null, "stop": null},
+        "block_weights": null,
+        "elemental_weights": null,
+        "model_profile": "auto",
+        "passthrough_named": [{"name": "note", "value": "preserve"}],
+        "passthrough_positional": ["future-pos"]
+      }
+    },
+    {
+      "id": "elemental-module-override",
+      "tag": "<lora:style:te=0.6:unet=0.8:lbw=OUTS:lbwe=ATTNDEEPOFF:profile=classic-26>",
+      "serialized": "<lora:style:te=0.6:unet=0.8:lbw=OUTS:lbwe=ATTNDEEPOFF:profile=classic-26>",
+      "normalized": {
+        "schema_version": 1,
+        "tag_type": "lora",
+        "network_name": "style",
+        "weights": {"te": {"kind": "scalar", "value": 0.6}, "unet": {"kind": "scalar", "value": 0.8}},
+        "hires": {"te": null, "unet": null},
+        "dyn_dim": null,
+        "active_range": {"start": null, "stop": null},
+        "block_weights": {"raw": "OUTS"},
+        "elemental_weights": {"raw": "ATTNDEEPOFF"},
+        "model_profile": "classic-26",
+        "passthrough_named": [],
+        "passthrough_positional": []
+      }
+    }
+  ]
+}

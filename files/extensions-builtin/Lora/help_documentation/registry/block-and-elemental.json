@@ -1,0 +1,15 @@
+{
+  "related": [
+    "weights-and-rank",
+    "curves-and-timing"
+  ],
+  "contexts": [
+    "studio.blocks",
+    "studio.elemental"
+  ],
+  "order": 6,
+  "tags": [
+    "blocks",
+    "elemental"
+  ]
+}

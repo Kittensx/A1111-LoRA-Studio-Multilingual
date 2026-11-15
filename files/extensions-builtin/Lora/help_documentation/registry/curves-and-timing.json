@@ -1,0 +1,16 @@
+{
+  "related": [
+    "weights-and-rank",
+    "block-and-elemental"
+  ],
+  "contexts": [
+    "studio.curves",
+    "studio.timing",
+    "studio.hires"
+  ],
+  "order": 5,
+  "tags": [
+    "curves",
+    "scheduling"
+  ]
+}

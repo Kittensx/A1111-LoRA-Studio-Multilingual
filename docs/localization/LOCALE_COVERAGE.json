@@ -1,0 +1,54 @@
+{
+  "languages": {
+    "en": {
+      "translated_entries": 195,
+      "total_entries": 195
+    },
+    "ru": {
+      "translated_entries": 195,
+      "total_entries": 195
+    },
+    "fr": {
+      "translated_entries": 195,
+      "total_entries": 195
+    },
+    "es": {
+      "translated_entries": 195,
+      "total_entries": 195
+    },
+    "it": {
+      "translated_entries": 195,
+      "total_entries": 195
+    },
+    "ja": {
+      "translated_entries": 195,
+      "total_entries": 195
+    },
+    "zh-CN": {
+      "translated_entries": 195,
+      "total_entries": 195
+    },
+    "pt-BR": {
+      "translated_entries": 195,
+      "total_entries": 195
+    },
+    "de": {
+      "translated_entries": 195,
+      "total_entries": 195
+    },
+    "ko": {
+      "translated_entries": 195,
+      "total_entries": 195
+    }
+  },
+  "message_ids": 195,
+  "english_fallback": true,
+  "source_text_not_localized": [
+    "LoRA prompt tags",
+    "network names",
+    "custom preset titles",
+    "model identifiers",
+    "JSON data"
+  ],
+  "scope": "Cataloged LoRA Studio UI, built-in recipe labels and descriptions, selected popup copy; A1111-wide UI and backend errors excluded"
+}

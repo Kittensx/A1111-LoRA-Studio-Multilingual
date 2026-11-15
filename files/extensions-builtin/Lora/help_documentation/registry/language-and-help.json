@@ -1,0 +1,15 @@
+{
+  "related": [
+    "getting-started",
+    "troubleshooting"
+  ],
+  "contexts": [
+    "studio.language",
+    "studio.help"
+  ],
+  "order": 8,
+  "tags": [
+    "language",
+    "localization"
+  ]
+}

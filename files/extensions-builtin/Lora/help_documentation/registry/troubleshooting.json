@@ -1,0 +1,14 @@
+{
+  "related": [
+    "getting-started",
+    "language-and-help"
+  ],
+  "contexts": [
+    "studio.errors"
+  ],
+  "order": 9,
+  "tags": [
+    "errors",
+    "support"
+  ]
+}

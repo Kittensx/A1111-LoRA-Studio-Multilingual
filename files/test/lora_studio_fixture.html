@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LoRA Studio — isolated UI checks</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+    /* Deliberately reproduce a forms reset after the application stylesheet.
+       Native Studio fields must still keep their own theme and text colour. */
+    .gradio-container input[type="text"], .gradio-container input[type="number"], .gradio-container input[type="search"], .gradio-container textarea, .gradio-container select { background-color:white; color:#f3f4f6; }
+    :root { --body-background-fill:#0b1018; --block-background-fill:#151e2b; --input-background-fill:#202b3b; --body-text-color:#edf1f7; --body-text-color-subdued:#b0bac9; --border-color-primary:#46556a; --input-border-color:#46556a; --button-secondary-background-fill:#2c3a4c; --button-secondary-text-color:#edf1f7; --button-primary-background-fill:#e87421; --color-accent:#f58c3e; color-scheme:dark; }
+    body.light { --body-background-fill:#fafafa; --block-background-fill:#fff; --input-background-fill:#f0f2f5; --body-text-color:#1c2634; --body-text-color-subdued:#526174; --border-color-primary:#aebaca; --input-border-color:#aebaca; --button-secondary-background-fill:#e0e5ed; --button-secondary-text-color:#1c2634; color-scheme:light; }
+    body { margin:0; padding:20px; font:15px/1.4 system-ui,sans-serif; background:var(--body-background-fill); color:var(--body-text-color); }
+    [hidden] { display:none !important; }
+    header { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
+    header button { padding:8px; }
+    main { max-width:1000px; }
+    .fixture-top { display:flex; gap:16px; }
+    .fixture-prompt { flex:1; min-width:0; }
+    .fixture-prompt textarea { width:100%; box-sizing:border-box; min-height:110px; padding:12px; background:var(--input-background-fill); color:var(--body-text-color); border:1px solid var(--border-color-primary); border-radius:6px; font:inherit; }
+    body.fixture-no-tokens { --input-background-fill:initial; --background-fill-secondary:initial; --input-text-color:initial; --body-text-color:initial; --input-placeholder-color:initial; --body-text-color-subdued:initial; }
+    .generate { width:160px; align-self:start; padding:22px 12px; background:#ed731a; color:white; border:0; border-radius:8px; }
+    #test-results { white-space:pre-wrap; }
+    @media(max-width:600px) { .generate { width:90px; } body { padding:10px; } }
+</style>
+<body class="dark">
+<header>
+  <strong>Isolated UI fixture — no model/server</strong>
+  <button id="run-tests">Run UI checks</button>
+  <button id="theme">Toggle theme</button>
+  <button id="quick">Quick tune second LoRA</button>
+  <button id="switch-tab">Switch txt2img / img2img</button>
+  <button id="narrow">Toggle narrow layout</button>
+</header>
+<main id="app" class="gradio-container">
+  <section id="tab_txt2img">
+    <h2>txt2img</h2>
+    <div id="txt2img_toprow" class="fixture-top">
+      <div id="txt2img_prompt_container" class="fixture-prompt"><div id="txt2img_prompt"><label>Prompt<textarea>portrait &lt;lora:same:0.5&gt; light &lt;lora:same:0.8:plugin=keep&gt;</textarea></label></div></div>
+      <button class="generate" disabled>Generate</button>
+    </div>
+  </section>
+  <section id="tab_img2img" hidden>
+    <h2>img2img</h2>
+    <div id="img2img_toprow" class="fixture-top">
+      <div id="img2img_prompt_container" class="fixture-prompt"><div id="img2img_prompt"><label>Prompt<textarea>image &lt;lora:other:0.7&gt;</textarea></label></div></div>
+      <button class="generate" disabled>Generate</button>
+    </div>
+  </section>
+</main>
+<pre id="test-results" aria-live="polite"></pre>
+<script>
+    const loaded = [];
+    const opts = {extra_networks_default_multiplier:1, extra_networks_add_text_separator:' ', lora_studio_open_by_default:true, lora_block_weight_presets:'', lora_elemental_weight_presets:''};
+    const gradioApp = () => document.getElementById('app');
+    const onUiLoaded = callback => loaded.push(callback);
+    const onAfterUiUpdate = () => {};
+    const onOptionsAvailable = callback => callback();
+    const updateInput = textarea => textarea.dispatchEvent(new Event('input', {bubbles:true}));
+    let library = {schema_version:3, presets:[]};
+    window.fetch = async (url, options = {}) => {
+        const path = new URL(url, location.href).pathname;
+        if (path.endsWith('/lora-studio/presets')) {
+            if (options.method === 'PUT') library = JSON.parse(options.body);
+            return {ok:true, json:async () => JSON.parse(JSON.stringify(library))};
+        }
+        if (path.endsWith('/loras')) return {ok:true, json:async () => []};
+        return {ok:false, status:404, json:async () => ({})};
+    };
+</script>
+<script src="../javascript/loraStudioModel.js"></script>
+<script src="../javascript/loraStudioBlocks.js"></script>
+<script src="../javascript/loraStudioCurves.js"></script>
+<script src="../javascript/loraStudioPresets.js"></script>
+<script src="../javascript/loraStudioI18n.js"></script>
+<script src="../javascript/loraStudioLocaleEn.js"></script>
+<script src="../javascript/loraStudioLocaleRu.js"></script>
+<script src="../javascript/loraStudioLocaleFr.js"></script>
+<script src="../javascript/loraStudioLocaleEs.js"></script>
+<script src="../javascript/loraStudioLocaleIt.js"></script>
+<script src="../javascript/loraStudioLocaleJa.js"></script>
+<script src="../javascript/loraStudioLocaleZhCn.js"></script>
+<script src="../javascript/loraStudioLocalePtBr.js"></script>
+<script src="../javascript/loraStudioLocaleDe.js"></script>
+<script src="../javascript/loraStudioLocaleKo.js"></script>
+<script src="../javascript/loraStudioView.js"></script>
+<script src="lora_studio_fixture.js"></script>
+</html>

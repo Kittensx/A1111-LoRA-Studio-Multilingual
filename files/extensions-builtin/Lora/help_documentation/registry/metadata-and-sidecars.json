@@ -1,0 +1,15 @@
+{
+  "related": [
+    "adding-loras",
+    "troubleshooting"
+  ],
+  "contexts": [
+    "studio.metadata",
+    "studio.sidecars"
+  ],
+  "order": 7,
+  "tags": [
+    "metadata",
+    "sidecars"
+  ]
+}

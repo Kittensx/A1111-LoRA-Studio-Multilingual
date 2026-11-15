@@ -1,0 +1,1943 @@
+{
+  "format": 1,
+  "name": "A1111 LoRA Studio Multilingual - runtime contextual help edition (experimental)",
+  "complete": true,
+  "created_utc": "2026-11-12T17:42:00.841565+00:00",
+  "source": "Adds locale-aware runtime help registry and contextual viewer; live A1111 installation not yet verified.",
+  "compatibility": "Full file replacements except processing.py. Unknown targets require explicit consent. No universal A1111 compatibility claim.",
+  "required_host_files": [
+    "modules/cache.py",
+    "modules/devices.py",
+    "modules/errors.py",
+    "modules/extra_networks_hypernet.py",
+    "modules/hashes.py",
+    "modules/images.py",
+    "modules/infotext_utils.py",
+    "modules/lowvram.py",
+    "modules/modelloader.py",
+    "modules/models/sd3/mmdit.py",
+    "modules/patches.py",
+    "modules/paths.py",
+    "modules/paths_internal.py",
+    "modules/processing.py",
+    "modules/script_callbacks.py",
+    "modules/scripts.py",
+    "modules/sd_disable_initialization.py",
+    "modules/sd_hijack.py",
+    "modules/sd_models_config.py",
+    "modules/sd_models_xl.py",
+    "modules/sd_unet.py",
+    "modules/sd_vae.py",
+    "modules/shared.py",
+    "modules/textual_inversion/textual_inversion.py",
+    "modules/timer.py",
+    "modules/ui_extra_networks_checkpoints.py",
+    "modules/ui_extra_networks_hypernets.py",
+    "modules/ui_extra_networks_textual_inversion.py",
+    "modules/ui_extra_networks_user_metadata.py",
+    "modules/util.py"
+  ],
+  "source_fingerprints": {
+    "extensions-builtin/Lora/extra_networks_lora.py": "c9e09451986eacaac76581cfd35b2fae7bebdf22e2c718df8bb7a27bb7a06ea7",
+    "extensions-builtin/Lora/lora.py": "444e6a40aea3e184599847c71f79e0daeb7207c26524819af2988a45f49956ea",
+    "extensions-builtin/Lora/lora_advanced.py": "731ae54822760e75ff0d4932887de37a806c9687da3d664e01f406d7801dc85b",
+    "extensions-builtin/Lora/lora_coverage.py": "a7ffbadd1d870725b533692fff9588d3cff083e3dc78b1b33604178c48aada9f",
+    "extensions-builtin/Lora/lora_logger.py": "ab682ac60c1f28caaf399d4f0ce7f66ea23896df64613f8391ea332d82932516",
+    "extensions-builtin/Lora/lora_patches.py": "e985894d8b8fdb94464f57910a4ed2d42c567cb3075b6ce9a82d3c45e343bc97",
+    "extensions-builtin/Lora/lora_presets.py": "85379a832810de213ce9adda45a731a4b50eb30c987b5a0da4c34db6b19c4263",
+    "extensions-builtin/Lora/lora_runtime.py": "fb636fd70b21edde859aa21a7a6cf21f0e6f37cad412bf2def7003b8091348eb",
+    "extensions-builtin/Lora/lora_schema.py": "e5d6bab0b2abaefaee687a38365825c6205d4b49bfddb222a4776b2014384e4a",
+    "extensions-builtin/Lora/lora_sidecars.py": "9a592d79bd47a629441b331a2641335987de0a502392a4ee58aabebcffa80616",
+    "extensions-builtin/Lora/lyco_helpers.py": "cb5dc7f8708eccafd7d44e94042a992875dd80a4ed58d53af0a3fa5cccb22166",
+    "extensions-builtin/Lora/network.py": "7f45cfc1fd936b6545df5a71375bf8ff38492c9e0b8d30d548c1a1604afd5662",
+    "extensions-builtin/Lora/network_full.py": "726271948befc66ec5b5443412ddb56791178ed69f441be9d49b19f789e740cd",
+    "extensions-builtin/Lora/network_glora.py": "d79d9d73cdc6f3c9ab35de54d59eafdf99b04ae320256bac6390d4f9e6a3224b",
+    "extensions-builtin/Lora/network_hada.py": "7fd4ebf461c4fa177180a48584c456788f7c7a229b5c56c5096e25d77d95c70f",
+    "extensions-builtin/Lora/network_ia3.py": "5c74dcd92296ed5dcc6e9f85286bc4887c87dfb7ddc2db8f1ee95e979b6cc85a",
+    "extensions-builtin/Lora/network_lokr.py": "39b550f1bb3599ad4405cf11c42b045895dc4152e1f5ec33d68e8969a9b8fbb5",
+    "extensions-builtin/Lora/network_lora.py": "727fa5b7771d37c17bd4f27f45d49f667376e533a2ef43da573de8e1a480a829",
+    "extensions-builtin/Lora/network_norm.py": "ae8545847b3cab1f0b06a292f763e7eaa746544f742574a757ca2dc2c98acbea",
+    "extensions-builtin/Lora/network_oft.py": "d52ef3250126d2f46d4d6f0286178cc6bde471907505954055dfcf1fe79ef747",
+    "extensions-builtin/Lora/networks.py": "03afe230cb59a16db7a993ac1d2c91540c45be2737464c58ecb7d9fc31948a24",
+    "extensions-builtin/Lora/preload.py": "7149819913070d6cfb039c07dc08fefa94370730ac64eb1959887a460bec1147",
+    "extensions-builtin/Lora/scripts/lora_script.py": "1b8774d82fe5e8b99bccd6c9d092aedf53f886709baa569f5b395d08cf22e3d7",
+    "extensions-builtin/Lora/ui_edit_user_metadata.py": "4f0ba69c737ed80b619d463bb9bfb0c52aaa01e826c5fb54156a133c7851ad23",
+    "extensions-builtin/Lora/ui_extra_networks_lora.py": "452f8990bee3dba341c057274f780a3c2f6d56dca8064adfe2d1af1693974bf1",
+    "html/extra-networks-card.html": "7770ef43fe06cbc8026fcbc9298c94a8d91b2ba55c9199566f5df3b0871750b7",
+    "html/extra-networks-copy-path-button.html": "91258db0ebe5a5a1dcc8008c36291fdf0fbab97260f8a341f4467ee7773e496a",
+    "html/extra-networks-edit-item-button.html": "076b8c71dab12528be62a1df041d9968d7bc7f21e92808c676e8364e3d66143a",
+    "html/extra-networks-metadata-button.html": "c97ebb40cd40128b4289ef193379b7e9529c8fbf45452f60fd5a34164fd1ee31",
+    "html/extra-networks-no-cards.html": "2b7c31b2c1a7c3e355fb42f7b2b98f98dc72332076fc900fbcc67b1c381a5279",
+    "html/extra-networks-pane-dirs.html": "1ba1bac64c7a1c079a8b3ebb6cf9aa141a4c22045c1ab178f5e693bb49113c61",
+    "html/extra-networks-pane-tree.html": "7b9443b4a04071bdac67ab3aaa309ed6b1ba3df08c337c1510b5861ab5c6c81f",
+    "html/extra-networks-pane.html": "c34d6d6ef2af83d8a68d81e076ac0a07dd014e6863dbae3a3afb1e689cfb1f81",
+    "html/extra-networks-tree-button.html": "7a944808b1320d52c7b4405c292825af10c511389a3f491661c2774c9012cd1d",
+    "javascript/extraNetworks.js": "613ec0d66f7828d1c6cd25542fb0cd56ec6c3c40b26f8d7446b5df10374b439f",
+    "javascript/loraStudioBlocks.js": "977557e5bd23e075c6960e947860008ab17e477aa9e0d623db1579696532b82f",
+    "javascript/loraStudioCurves.js": "9b3e6dc904ed3ffe2122f2a74f88f7075af2ca6a469b724936c6a03cb80df230",
+    "javascript/loraStudioMetadata.js": "e30bf2110a5026b75c29b48914f3242b946e1bd666cff4c992a68cd72697311d",
+    "javascript/loraStudioModel.js": "62776624e6a76411973323422f3a528ded8fde36118268e7d02aaf3827ffbdaf",
+    "javascript/loraStudioPresets.js": "49ddd482435ad7100f05796c55173d8e0e03f287edcdb39bb98965b1f72cdb69",
+    "javascript/loraStudioView.js": "96609433629a737be49d011463e3d63716c09157557c6131a74cc151460bfcaa",
+    "modules/extra_networks.py": "87796cebf12940e5efab866343ec43403c1a29a83f04df5d8ff24f28aa7acc8d",
+    "modules/sd_models.py": "43f8fcb61edf1cc19bb1c516a2b3eb6855b594c80f31f467ef6ef6a1d55b06cf",
+    "modules/ui_extra_networks.py": "950aca5b7cd5628771ff3a6c289c8fa66fb6edad8594c018c1b33cd289e8ee82",
+    "style.css": "d5bb38df09ce5723d243d193b63de291effb1981e1c9913d7a289848a75ed9bc",
+    "modules/cache.py": "b2c17428c0e6298427880c94f7ff07b187eacfb5451bacc2ecea168a17f2c875",
+    "modules/devices.py": "5e7319178dcd1e868af3cc9017958c24d729b9b084f6ba44fe28a1419f139728",
+    "modules/errors.py": "9b1e60f8739e8a30bd147fa5254201996bee0acd66bd7be70d7e11da39072d83",
+    "modules/extra_networks_hypernet.py": "3a45197d40eb61d2b9c77596c3d69a317e8cd7b054780ba3e107a7dd2213b5a3",
+    "modules/hashes.py": "8abaf0ffbac2d679640e65188374f7a1141f901ddf9377dbc926ebebca5963a8",
+    "modules/images.py": "83cac6af2314576da522efe1920193c2b85e7877ea64b540d872fde2683c9c0f",
+    "modules/infotext_utils.py": "8e2520d172dd7f66648ad3712b8b6a834e544d4e6dc3ad556e3144a1af235200",
+    "modules/lowvram.py": "6f454bca8964883bee8cda1474f253d92bceb3529603d42cb7d5812da49c998f",
+    "modules/modelloader.py": "59a1df3db4101819d5d7bb149f4840d8737c4bbbf540280cc21d01fd6ab97c12",
+    "modules/models/sd3/mmdit.py": "07a9d78737f16080a76ed1d99ba11e3ca3c6138b90dd29d6bb96b98aa270a10d",
+    "modules/patches.py": "b434f591f799d444c18b12808444451239e4389b2bc4b2d0d2cfdf6bf632af7d",
+    "modules/paths.py": "0e9a1bf17af93ad528268db4c813c358379b670945ddeda069583e50660b3d0f",
+    "modules/paths_internal.py": "83386f46cbdd6ec91beda9fcc44bd4bb7922c85d30170cd10487270a3d31561a",
+    "modules/processing.py": "19777bc83b0320a7144b119445c5ad7a2b8fd7a6291b2368c6aa5c9a63c726c8",
+    "modules/script_callbacks.py": "0f6636a09781281102760ae7f49c9031ca8ed121500b1be43098e15f03c227ff",
+    "modules/scripts.py": "3d759c1627601979b51637bfff21ed3a3651034da2a1de490a4dbf706f77f8da",
+    "modules/sd_disable_initialization.py": "caff5ea43f2f14850e6b3b325b096e7f6e517232d040105a640d274feed4f61a",
+    "modules/sd_hijack.py": "fd9fe71f7d3861f737adda02690de3d95232365561ead3fc4c66176c531108b9",
+    "modules/sd_models_config.py": "2e7615843d8699605a171be6ef04791e5852d2226c91d79e73f7735ab8289062",
+    "modules/sd_models_xl.py": "da3e0adbecacd8c03feadbc4c8ec98d5aa8691e42c6e080327c00018c0342ec9",
+    "modules/sd_unet.py": "81f0b6deb5ba5ae07b558c38322da06b8571db51fd3c5bedcb240b69795c1e2c",
+    "modules/sd_vae.py": "be1d0f07b0a1bb5fd7b059576309d39bfeff5e87b3daaa8e1d4f6fc4921bec08",
+    "modules/shared.py": "238a571518bfb85dbe26be0307fea8424ed12139423d58ebe14703856d828700",
+    "modules/textual_inversion/textual_inversion.py": "ee541372cced78454373d82bd4738326ab55be6a1607ab72513a34e3bdd02761",
+    "modules/timer.py": "92be9a57778761bd10737d185e7538d760ffa2b075628778c41ecf722646c226",
+    "modules/ui_extra_networks_checkpoints.py": "283aec03077bbda48b7b2f68a6e26c59a0e5c001d25c18116e9d0eed2c727996",
+    "modules/ui_extra_networks_hypernets.py": "ed285be4e1d60c5e63a5665ac053c93d627e3acc091297bf5183f73a2b3ab6bc",
+    "modules/ui_extra_networks_textual_inversion.py": "e2312c35ded639b4eee2eca3a2b824a570d7c88b5b539def84ec50a81ada1d93",
+    "modules/ui_extra_networks_user_metadata.py": "409e8b1e0fb46fae9e584ae1a016e10f6ce21dea8c6eefb4125a139eba294ebc",
+    "modules/util.py": "4aed13dc52d17aeb0ad1abe3291ed31a9d25ed79961d7ab8945a943841371657",
+    "extensions-builtin/Lora/lora_keys.py": "60a86b127dd43a74a0427574faf06c7cf60590319f47782a4d64d6e6a4b892cf",
+    "modules/safe.py": "e978b6effaa3d551453a2eb17558946451e9b7046169f8c27c8d935f46559962",
+    "extensions-builtin/Lora/lora_studio_access.py": "15a8546b25291c0413a9790c85ebd67983d3790ef2a8c13846c60d730bbd5699",
+    "modules/options.py": "19f26c98c49b27ee38c2355bee0e374a0dce1a762c4b57ef75ded18f493ff506",
+    "modules/config_store.py": "f64997798417f197158b1b7ca3ba61471d64040604685499b35cb0ffcd1dd4f4",
+    "modules/sd_emphasis.py": "52b30b4aeb68d62b64aebf1da049dcd2e3bc227545b32b4710a186c37de1df25",
+    "modules/asset_files.py": "823f9801201453337c3546301d2ff62bf22ecc07a43d60d10ce65b325e071e28",
+    "modules/sd_hijack_clip_old.py": "eebc8f88b970501f22253add9d066bb7958857f4f40e39a57d1e47a54037c2b5",
+    "modules/region_utils.py": "9535a871bc4caac66dfaec027be6f38ca0e34f6c09ab8249eefd18c4a6c51d24",
+    "modules/ui_settings.py": "5c1db691a4f8dabf8a6cd3884ddc29dbc50c0ff15191b0f3a2a17a99a6773770",
+    "modules/shared_options.py": "e164e9cead61414991b1cd963ce362812814afe8be1173a9551ba9b0c6cad127",
+    "test/test_config_store.py": "73bd0621cfa9c4b63c26065132a133bd9d01c03d61e9fed589605be87da7b71b",
+    "test/test_runtime_external_audit.py": "916fcd627048f5abe5695402e28596b4ab8b2ec0cecf6b88144e56bb8bbe5f94",
+    "modules/api/api.py": "efbb2cdd9c0b34dacda76279111c6eec9fc8b2cca32320bc1a0d30e3c46dd678",
+    "test/test_runtime_asset_identity.py": "1cc9f4cc345a3ed7a1c02fc2e12f333ec2680826a6fda9e688adb7a17fb8f24f",
+    "test/test_runtime_v10_lifecycle.py": "5622a9f7a585003e0ef08c9a3b52bbb4808172360c8de29070e57e453bceb5a6",
+    "test/test_runtime_known_routes.py": "f72eead9b45209eb5366cec667ec770f92adca6dfd1ba9632d1d8700b222e694",
+    "test/lora_studio_fixture.js": "711ef4a66c0e875fab0eb0f2bf62733e566929725f248a24baa39c8fe01820bb"
+  },
+  "assets": [
+    {
+      "path": "LICENSE-A1111.txt",
+      "sha256": "c62d3d5c30fb226893faa5002a7fa4c159e1660d1298534fdd1d1efe28730067",
+      "bytes": 35240,
+      "role": "license"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/extra_networks_lora.py",
+      "sha256": "c9e09451986eacaac76581cfd35b2fae7bebdf22e2c718df8bb7a27bb7a06ea7",
+      "bytes": 2659,
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/lora.py",
+      "sha256": "444e6a40aea3e184599847c71f79e0daeb7207c26524819af2988a45f49956ea",
+      "bytes": 357,
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/lora_advanced.py",
+      "bytes": 21750,
+      "sha256": "731ae54822760e75ff0d4932887de37a806c9687da3d664e01f406d7801dc85b",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/lora_coverage.py",
+      "sha256": "a7ffbadd1d870725b533692fff9588d3cff083e3dc78b1b33604178c48aada9f",
+      "bytes": 9838,
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/lora_keys.py",
+      "bytes": 3867,
+      "sha256": "60a86b127dd43a74a0427574faf06c7cf60590319f47782a4d64d6e6a4b892cf",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/lora_logger.py",
+      "sha256": "ab682ac60c1f28caaf399d4f0ce7f66ea23896df64613f8391ea332d82932516",
+      "bytes": 929,
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/lora_patches.py",
+      "sha256": "e985894d8b8fdb94464f57910a4ed2d42c567cb3075b6ce9a82d3c45e343bc97",
+      "bytes": 1709,
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/lora_presets.py",
+      "sha256": "85379a832810de213ce9adda45a731a4b50eb30c987b5a0da4c34db6b19c4263",
+      "bytes": 12562,
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/lora_runtime.py",
+      "sha256": "fb636fd70b21edde859aa21a7a6cf21f0e6f37cad412bf2def7003b8091348eb",
+      "bytes": 1258,
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/lora_schema.py",
+      "sha256": "e5d6bab0b2abaefaee687a38365825c6205d4b49bfddb222a4776b2014384e4a",
+      "bytes": 14049,
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/lora_sidecars.py",
+      "sha256": "9a592d79bd47a629441b331a2641335987de0a502392a4ee58aabebcffa80616",
+      "bytes": 4909,
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/lora_studio_access.py",
+      "bytes": 2815,
+      "sha256": "15a8546b25291c0413a9790c85ebd67983d3790ef2a8c13846c60d730bbd5699",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/lyco_helpers.py",
+      "sha256": "cb5dc7f8708eccafd7d44e94042a992875dd80a4ed58d53af0a3fa5cccb22166",
+      "bytes": 2409,
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/network.py",
+      "bytes": 15105,
+      "sha256": "7f45cfc1fd936b6545df5a71375bf8ff38492c9e0b8d30d548c1a1604afd5662",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/network_full.py",
+      "sha256": "726271948befc66ec5b5443412ddb56791178ed69f441be9d49b19f789e740cd",
+      "bytes": 1106,
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/network_glora.py",
+      "sha256": "d79d9d73cdc6f3c9ab35de54d59eafdf99b04ae320256bac6390d4f9e6a3224b",
+      "bytes": 1468,
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/network_hada.py",
+      "sha256": "7fd4ebf461c4fa177180a48584c456788f7c7a229b5c56c5096e25d77d95c70f",
+      "bytes": 2361,
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/network_ia3.py",
+      "sha256": "5c74dcd92296ed5dcc6e9f85286bc4887c87dfb7ddc2db8f1ee95e979b6cc85a",
+      "bytes": 1010,
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/network_lokr.py",
+      "sha256": "39b550f1bb3599ad4405cf11c42b045895dc4152e1f5ec33d68e8969a9b8fbb5",
+      "bytes": 2957,
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/network_lora.py",
+      "bytes": 7885,
+      "sha256": "727fa5b7771d37c17bd4f27f45d49f667376e533a2ef43da573de8e1a480a829",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/network_norm.py",
+      "sha256": "ae8545847b3cab1f0b06a292f763e7eaa746544f742574a757ca2dc2c98acbea",
+      "bytes": 1085,
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/network_oft.py",
+      "sha256": "d52ef3250126d2f46d4d6f0286178cc6bde471907505954055dfcf1fe79ef747",
+      "bytes": 5562,
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/networks.py",
+      "bytes": 44229,
+      "sha256": "03afe230cb59a16db7a993ac1d2c91540c45be2737464c58ecb7d9fc31948a24",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/preload.py",
+      "sha256": "7149819913070d6cfb039c07dc08fefa94370730ac64eb1959887a460bec1147",
+      "bytes": 513,
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/scripts/lora_script.py",
+      "bytes": 9349,
+      "sha256": "35a60fcab758d2ab9e642bb202805eeeadc3c0db62c78690730617a34361acad",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/tests/ceb_reported_layers.json",
+      "sha256": "bcf32a0957496558976d5dfc0051ff3d07f887469c5889704d9ba1be511ccf3e",
+      "bytes": 41555,
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/tests/test_lora_loading.py",
+      "sha256": "1644efd553fe5776d916ec88b7594c6c6ac366771fef47157c4f1dabd8c13e87",
+      "bytes": 24182,
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/ui_edit_user_metadata.py",
+      "sha256": "4f0ba69c737ed80b619d463bb9bfb0c52aaa01e826c5fb54156a133c7851ad23",
+      "bytes": 8703,
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/ui_extra_networks_lora.py",
+      "bytes": 4318,
+      "sha256": "452f8990bee3dba341c057274f780a3c2f6d56dca8064adfe2d1af1693974bf1",
+      "role": "runtime"
+    },
+    {
+      "path": "files/html/extra-networks-card.html",
+      "sha256": "7770ef43fe06cbc8026fcbc9298c94a8d91b2ba55c9199566f5df3b0871750b7",
+      "bytes": 446,
+      "role": "runtime"
+    },
+    {
+      "path": "files/html/extra-networks-copy-path-button.html",
+      "sha256": "91258db0ebe5a5a1dcc8008c36291fdf0fbab97260f8a341f4467ee7773e496a",
+      "bytes": 168,
+      "role": "runtime"
+    },
+    {
+      "path": "files/html/extra-networks-edit-item-button.html",
+      "sha256": "076b8c71dab12528be62a1df041d9968d7bc7f21e92808c676e8364e3d66143a",
+      "bytes": 162,
+      "role": "runtime"
+    },
+    {
+      "path": "files/html/extra-networks-metadata-button.html",
+      "sha256": "c97ebb40cd40128b4289ef193379b7e9529c8fbf45452f60fd5a34164fd1ee31",
+      "bytes": 161,
+      "role": "runtime"
+    },
+    {
+      "path": "files/html/extra-networks-no-cards.html",
+      "sha256": "2b7c31b2c1a7c3e355fb42f7b2b98f98dc72332076fc900fbcc67b1c381a5279",
+      "bytes": 119,
+      "role": "runtime"
+    },
+    {
+      "path": "files/html/extra-networks-pane-dirs.html",
+      "sha256": "1ba1bac64c7a1c079a8b3ebb6cf9aa141a4c22045c1ab178f5e693bb49113c61",
+      "bytes": 322,
+      "role": "runtime"
+    },
+    {
+      "path": "files/html/extra-networks-pane-tree.html",
+      "sha256": "7b9443b4a04071bdac67ab3aaa309ed6b1ba3df08c337c1510b5861ab5c6c81f",
+      "bytes": 423,
+      "role": "runtime"
+    },
+    {
+      "path": "files/html/extra-networks-pane.html",
+      "sha256": "c34d6d6ef2af83d8a68d81e076ac0a07dd014e6863dbae3a3afb1e689cfb1f81",
+      "bytes": 3675,
+      "role": "runtime"
+    },
+    {
+      "path": "files/html/extra-networks-tree-button.html",
+      "sha256": "7a944808b1320d52c7b4405c292825af10c511389a3f491661c2774c9012cd1d",
+      "bytes": 955,
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/extraNetworks.js",
+      "sha256": "bda3515e796c1ff14361117db7163a0d081c0ec3dd3741633ec9a67ab06f5044",
+      "bytes": 40402,
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/loraStudioBlocks.js",
+      "bytes": 8383,
+      "sha256": "977557e5bd23e075c6960e947860008ab17e477aa9e0d623db1579696532b82f",
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/loraStudioCurves.js",
+      "bytes": 6626,
+      "sha256": "9b3e6dc904ed3ffe2122f2a74f88f7075af2ca6a469b724936c6a03cb80df230",
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/loraStudioI18n.js",
+      "sha256": "36a32d30e938c9d4a2f1a918d89f5ada7c194c975632815834ea247103c3b640",
+      "bytes": 3998,
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/loraStudioLocaleDe.js",
+      "sha256": "cc51ba0bbac605a14477fb41fc6bf049b639c517191e3bed8cb16f662f8ab7b2",
+      "bytes": 19816,
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/loraStudioLocaleEn.js",
+      "sha256": "232cbfe373c5eac3a5656319332614490779737479cb86dc923f6d66df65baf3",
+      "bytes": 18445,
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/loraStudioLocaleEs.js",
+      "sha256": "cf8fee94c3072dace389b7e43ec3cb1b097c5edbe441d9cda882a23ad7c4090b",
+      "bytes": 19537,
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/loraStudioLocaleFr.js",
+      "sha256": "b7714776ce55003cac6d6c99be474d729b8549c9f6cfdc6f668c74f7952d7a72",
+      "bytes": 20462,
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/loraStudioLocaleIt.js",
+      "sha256": "5c58280fcc272ad9329ef94b7df182b170b173460952b992e446980b2f0ee654",
+      "bytes": 19299,
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/loraStudioLocaleJa.js",
+      "sha256": "b478e4a346ca50b0da1a2e3c696e46853fa6d71855ead01a8735291162d94671",
+      "bytes": 22557,
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/loraStudioLocaleKo.js",
+      "sha256": "a702d9ea93732222df87065fa0b05128fcbc9dc14107332a381e73b23874e364",
+      "bytes": 20958,
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/loraStudioLocalePtBr.js",
+      "sha256": "a657bc7ac8a0a85859e95073f11bf3e24575e04a779024e9a904c99d6d36da56",
+      "bytes": 19565,
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/loraStudioLocaleRu.js",
+      "sha256": "99bfaef073af8643c48fb2e5e4f346f93f2ba72f1d666d265ae842dfc78e79a8",
+      "bytes": 26864,
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/loraStudioLocaleZhCn.js",
+      "sha256": "b4f5a53cf2a38242f41c2f9afa2f00e0c142dab4e6d0a6a3f617c1573874ca95",
+      "bytes": 17907,
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/loraStudioMetadata.js",
+      "sha256": "e30bf2110a5026b75c29b48914f3242b946e1bd666cff4c992a68cd72697311d",
+      "bytes": 4815,
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/loraStudioModel.js",
+      "bytes": 12566,
+      "sha256": "62776624e6a76411973323422f3a528ded8fde36118268e7d02aaf3827ffbdaf",
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/loraStudioPresets.js",
+      "sha256": "49ddd482435ad7100f05796c55173d8e0e03f287edcdb39bb98965b1f72cdb69",
+      "bytes": 17702,
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/loraStudioView.js",
+      "bytes": 120440,
+      "sha256": "2b2b95293566ac3293da151d5d4aa4945625ed30fbd89b0f62f6341dee125a9e",
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/ui.js",
+      "sha256": "926be45c420bdee4b38d68c108906c23674e9e354d0b974ab61b27e106a848da",
+      "bytes": 13380,
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/modules/api/api.py",
+      "bytes": 42514,
+      "sha256": "efbb2cdd9c0b34dacda76279111c6eec9fc8b2cca32320bc1a0d30e3c46dd678",
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/asset_files.py",
+      "bytes": 4012,
+      "sha256": "823f9801201453337c3546301d2ff62bf22ecc07a43d60d10ce65b325e071e28",
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/cache.py",
+      "bytes": 4419,
+      "sha256": "b2c17428c0e6298427880c94f7ff07b187eacfb5451bacc2ecea168a17f2c875",
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/config_store.py",
+      "bytes": 1534,
+      "sha256": "f64997798417f197158b1b7ca3ba61471d64040604685499b35cb0ffcd1dd4f4",
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/devices.py",
+      "sha256": "5e7319178dcd1e868af3cc9017958c24d729b9b084f6ba44fe28a1419f139728",
+      "bytes": 9892,
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/errors.py",
+      "sha256": "9b1e60f8739e8a30bd147fa5254201996bee0acd66bd7be70d7e11da39072d83",
+      "bytes": 4585,
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/modules/extra_networks.py",
+      "sha256": "87796cebf12940e5efab866343ec43403c1a29a83f04df5d8ff24f28aa7acc8d",
+      "bytes": 7650,
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/hashes.py",
+      "bytes": 3866,
+      "sha256": "8abaf0ffbac2d679640e65188374f7a1141f901ddf9377dbc926ebebca5963a8",
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/lowvram.py",
+      "bytes": 6417,
+      "sha256": "6f454bca8964883bee8cda1474f253d92bceb3529603d42cb7d5812da49c998f",
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/options.py",
+      "bytes": 15412,
+      "sha256": "19f26c98c49b27ee38c2355bee0e374a0dce1a762c4b57ef75ded18f493ff506",
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/patches.py",
+      "sha256": "b434f591f799d444c18b12808444451239e4389b2bc4b2d0d2cfdf6bf632af7d",
+      "bytes": 3588,
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/processing.py",
+      "bytes": 100385,
+      "sha256": "19777bc83b0320a7144b119445c5ad7a2b8fd7a6291b2368c6aa5c9a63c726c8",
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/modules/region_utils.py",
+      "bytes": 14737,
+      "sha256": "9535a871bc4caac66dfaec027be6f38ca0e34f6c09ab8249eefd18c4a6c51d24",
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/safe.py",
+      "sha256": "e978b6effaa3d551453a2eb17558946451e9b7046169f8c27c8d935f46559962",
+      "bytes": 7169,
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/script_callbacks.py",
+      "bytes": 22112,
+      "sha256": "0f6636a09781281102760ae7f49c9031ca8ed121500b1be43098e15f03c227ff",
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/modules/sd_disable_initialization.py",
+      "sha256": "caff5ea43f2f14850e6b3b325b096e7f6e517232d040105a640d274feed4f61a",
+      "bytes": 14499,
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/sd_emphasis.py",
+      "bytes": 2850,
+      "sha256": "52b30b4aeb68d62b64aebf1da049dcd2e3bc227545b32b4710a186c37de1df25",
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/sd_hijack.py",
+      "bytes": 17795,
+      "sha256": "fd9fe71f7d3861f737adda02690de3d95232365561ead3fc4c66176c531108b9",
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/modules/sd_hijack_clip_old.py",
+      "bytes": 3662,
+      "sha256": "eebc8f88b970501f22253add9d066bb7958857f4f40e39a57d1e47a54037c2b5",
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/sd_models.py",
+      "bytes": 42630,
+      "sha256": "43f8fcb61edf1cc19bb1c516a2b3eb6855b594c80f31f467ef6ef6a1d55b06cf",
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/sd_models_config.py",
+      "bytes": 6921,
+      "sha256": "2e7615843d8699605a171be6ef04791e5852d2226c91d79e73f7735ab8289062",
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/sd_vae.py",
+      "bytes": 11016,
+      "sha256": "be1d0f07b0a1bb5fd7b059576309d39bfeff5e87b3daaa8e1d4f6fc4921bec08",
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/shared_options.py",
+      "bytes": 50981,
+      "sha256": "e164e9cead61414991b1cd963ce362812814afe8be1173a9551ba9b0c6cad127",
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/textual_inversion/textual_inversion.py",
+      "bytes": 44061,
+      "sha256": "ee541372cced78454373d82bd4738326ab55be6a1607ab72513a34e3bdd02761",
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/ui_extra_networks.py",
+      "sha256": "950aca5b7cd5628771ff3a6c289c8fa66fb6edad8594c018c1b33cd289e8ee82",
+      "bytes": 34110,
+      "role": "runtime"
+    },
+    {
+      "path": "files/modules/ui_settings.py",
+      "bytes": 15713,
+      "sha256": "5c1db691a4f8dabf8a6cd3884ddc29dbc50c0ff15191b0f3a2a17a99a6773770",
+      "role": "runtime"
+    },
+    {
+      "path": "files/script.js",
+      "sha256": "717815fbdee2bbc27d1c3bdaa9e5bbd04868ea713223ff39b26761378ddda6e6",
+      "bytes": 6601,
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/style.css",
+      "bytes": 63462,
+      "sha256": "c32b2e5856d70c1dc40edc39d5934a74279b32881a2723dc3921996f74ea6149",
+      "role": "runtime"
+    },
+    {
+      "path": "files/test/lora_combinations.test.cjs",
+      "sha256": "f29e1088e45d9fe5c108bb6fe5a9d59ddd4f8c596d4efc4b5b6dfa4e289cacb3",
+      "bytes": 4397,
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/lora_interactions.test.cjs",
+      "bytes": 2546,
+      "sha256": "2a820c867053039c7dc671fcd0e1c71a14c78d60b61a3cfd90a54952acaa3c04",
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/lora_quick_presets.test.cjs",
+      "sha256": "9e30f0ee83084ead4735f5673e6131fce3665360534aa73c77db59a240496758",
+      "bytes": 6688,
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/lora_studio_browser_automated.html",
+      "role": "verification-only-not-installed",
+      "sha256": "30364e419c9c5b07c3eab620d7f6777c453b7a4346ce1ade0ee5ef2a71b558a6",
+      "bytes": 8651
+    },
+    {
+      "path": "files/test/lora_studio_dom.test.cjs",
+      "sha256": "e17181b679c38831f91af9c2ac494a2479414028d72e9c8031bf9e7b455046fe",
+      "bytes": 10874,
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/lora_studio_fixture.html",
+      "sha256": "2772c2c6775ee955f8a2088e968453484a4c272fe7b71ff8a3548fb2b052e983",
+      "bytes": 5807,
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/lora_studio_fixture.js",
+      "bytes": 22336,
+      "sha256": "711ef4a66c0e875fab0eb0f2bf62733e566929725f248a24baa39c8fe01820bb",
+      "role": "verification"
+    },
+    {
+      "path": "files/test/lora_studio_i18n.test.cjs",
+      "role": "verification-only-not-installed",
+      "sha256": "bdb17a5652a3becbbb43be809197dbe9c8aa0ca810fe5136227278306e3ea859",
+      "bytes": 6090
+    },
+    {
+      "path": "files/test/lora_tag_contract.json",
+      "sha256": "071efb031e2b36434ffeca54cb5170b516a97311fb1990bc0e5d7a133bd06ec8",
+      "bytes": 5112,
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/test_config_store.py",
+      "bytes": 11708,
+      "sha256": "73bd0621cfa9c4b63c26065132a133bd9d01c03d61e9fed589605be87da7b71b",
+      "role": "verification"
+    },
+    {
+      "path": "files/test/test_extra_networks_parser.py",
+      "sha256": "44777d4bd91055d4eaba198edbf71b92874f99369be6b7e9b5451783ca35c822",
+      "bytes": 644,
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/test_lora_advanced.py",
+      "sha256": "f278fe6164e2d7500b93e0b75c4370ce1aa7e01495087e305a2d820629d76b56",
+      "bytes": 4543,
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/test_lora_interaction_contract.py",
+      "bytes": 1799,
+      "sha256": "84a327f0b8a8420a058ca9540e86e83df0d7cbd62b845ab957b9e835400f6131",
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/test_lora_presets_transaction.py",
+      "bytes": 5653,
+      "sha256": "474e1f1f3581e6964c6921cebfce0e991d22b6a6a8720eaba4d58d930238b857",
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/test_lora_quick_presets.py",
+      "sha256": "3cd9f63ab0004f374da9778e5929ae6b7fca092349f4384d86b1c9379d1c5d74",
+      "bytes": 3672,
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/test_lora_schema.py",
+      "sha256": "5e327e4fe549f1c08273ac51ac074854fd415194ede708a723f28aab935e247a",
+      "bytes": 29529,
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/test_lora_studio_access.py",
+      "bytes": 6655,
+      "sha256": "0ba381de1f31c66c9b81d5702e14c42cd3315b50692e28c18f5b40ecad57a000",
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/test_runtime_asset_identity.py",
+      "bytes": 15739,
+      "sha256": "1cc9f4cc345a3ed7a1c02fc2e12f333ec2680826a6fda9e688adb7a17fb8f24f",
+      "role": "verification"
+    },
+    {
+      "path": "files/test/test_runtime_bias_embeddings.py",
+      "bytes": 11847,
+      "sha256": "6db610a2130e9477ead838dafcf1480ad18bf5329c7f0f5c4a2ed5d88952753e",
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/test_runtime_combinations.py",
+      "bytes": 8935,
+      "sha256": "b626d7f52f30870b9521a977f4934b0a164fed0fd4fbce99d7fa6e9a5676c8ed",
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/test_runtime_compatibility.py",
+      "bytes": 14795,
+      "sha256": "cc10359aa07220e52c56e4a55a3a8437d8bf0f8e9a97975257273e0a3a6b593a",
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/test_runtime_connections.py",
+      "bytes": 12478,
+      "sha256": "c32d3293472d9a34cc7ef86f1c5db568c6b4b60e375174f40ada9c06c7bcfab2",
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/test_runtime_edgecases.py",
+      "bytes": 12519,
+      "sha256": "67a123b51613febefed7fbc4d700ed034ae3775a2eef823b5ad5d8c0c030cc8c",
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/test_runtime_external_audit.py",
+      "bytes": 20977,
+      "sha256": "916fcd627048f5abe5695402e28596b4ab8b2ec0cecf6b88144e56bb8bbe5f94",
+      "role": "verification"
+    },
+    {
+      "path": "files/test/test_runtime_known_routes.py",
+      "bytes": 3135,
+      "sha256": "f72eead9b45209eb5366cec667ec770f92adca6dfd1ba9632d1d8700b222e694",
+      "role": "verification"
+    },
+    {
+      "path": "files/test/test_runtime_recovery.py",
+      "bytes": 17841,
+      "sha256": "07a223d44cfc1296d318971c5e128768e032122a7bc0a21ed74a06e011b9bfb1",
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/test_runtime_sd3_embeddings.py",
+      "bytes": 2899,
+      "sha256": "6792e5091d1e10dac5deec13965f253b12cb249b3d1cefd95f2954d28af2db02",
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/test_runtime_stability.py",
+      "bytes": 25220,
+      "sha256": "a23f921f55c8af292c6ebc92611a2a9430f33b5be91940c644e75d445b492461",
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/test_runtime_state_io.py",
+      "bytes": 13935,
+      "sha256": "7bdf0cda159e82e26103de3fb6860f4db8da406622268b3ac19f97e776bbb96c",
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/test_runtime_v10_lifecycle.py",
+      "bytes": 7396,
+      "sha256": "5622a9f7a585003e0ef08c9a3b52bbb4808172360c8de29070e57e453bceb5a6",
+      "role": "verification"
+    },
+    {
+      "path": "files/test/test_runtime_vae_failures.py",
+      "bytes": 3557,
+      "sha256": "6e5ebcf89790560725086dfe047bdcdeefb66069e47467d6178c147d1a122e40",
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "files/test/test_runtime_wrapped_lora.py",
+      "bytes": 4273,
+      "sha256": "f5565d9437b50fad20e1f7f0af074e99385540ac927a46509ed11537a92896b0",
+      "role": "verification-only-not-installed"
+    },
+    {
+      "path": "patches/processing-hires.json",
+      "bytes": 5682,
+      "sha256": "590f4ffc454d69802f3bfa0f9a0dddd74b5b3120aca151f5f4912882fa67657c",
+      "role": "patch"
+    },
+    {
+      "path": "reference-only/modules/processing.py",
+      "bytes": 100385,
+      "sha256": "19777bc83b0320a7144b119445c5ad7a2b8fd7a6291b2368c6aa5c9a63c726c8",
+      "role": "reference-only-not-installed"
+    },
+    {
+      "path": "reference-only/requirements_versions.txt",
+      "sha256": "b5a9f5b263b84064aae2b201f775292cd2705503266d9a40c3f20de790ce2061",
+      "bytes": 693,
+      "role": "reference-only-not-installed"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/lora_help_registry.py",
+      "sha256": "8152f689410d819b2ef244849fe1ea1e00288b82bc553f1eae2846998f666d6a",
+      "role": "runtime"
+    },
+    {
+      "path": "files/javascript/loraStudioHelp.js",
+      "sha256": "b12dc75da1efc23b4c7cc64f794c6f825fefefcac112ecb125f3e2a4228d5494",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/en/adding-loras.md",
+      "sha256": "e451310c1bc4a85f38d22d5d645e72d6bb136cf01e4726643b87e87a738e5321",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/en/block-and-elemental.md",
+      "sha256": "228f55179ca157a96b0f18862301cd1e782a2b3f51e1a2398da125391617552e",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/en/curves-and-timing.md",
+      "sha256": "60419d0e601a896c6339502c9a455ef036052174b4c46b3716b5d3cd31d30f75",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/en/getting-started.md",
+      "sha256": "261e8e9660e0b6fa72b2d7b28781422ea4e9e9af53a9d86673372a96d738c79d",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/en/language-and-help.md",
+      "sha256": "238ec08346ac3f89344a0addc01694e56adb5f2627971db96239bf6f2a766b36",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/en/metadata-and-sidecars.md",
+      "sha256": "55807d4bf8fbf920acb9d32f9d0d6f02fefebadacc84ba1a2cd2455743bacf6a",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/en/presets-and-backups.md",
+      "sha256": "f8cc7950631cba3e869c4035a4d323eda458057a4257015f3199883cb16fea67",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/en/troubleshooting.md",
+      "sha256": "0afd79d6166b3bf55c98d1be98973e7fa7100d4a13db4154626c6b1e49a71756",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/en/weights-and-rank.md",
+      "sha256": "7eb4840d31bd5cef4f8691a70ca4ee1d1f8508e63d43288d07026ff31d2449b4",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/registry/adding-loras.json",
+      "sha256": "6afde4fbbe5e2fb6cc7a676e41f6c1366cd889a05d24e1b8828f3796b28171a9",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/registry/block-and-elemental.json",
+      "sha256": "eab11857221affeb560bcf09a376a5e1c94d9a9264a38b74ce66a0b6041cfbd2",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/registry/curves-and-timing.json",
+      "sha256": "c281d8f94120733d251d9cf5addccaa8f8c09aa8bfc8cd0fc58f5a838989e533",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/registry/getting-started.json",
+      "sha256": "1596407261b39ce54ec17690aa23b3c622d11a83d9247e629ab4da93a68da74a",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/registry/language-and-help.json",
+      "sha256": "1ceb1705697b531facad9c3a776007dd0b7a3bce04fdfda8de81f06bf7338faa",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/registry/metadata-and-sidecars.json",
+      "sha256": "fce977fbf85644ad09160d32c48eaa918dcc34de41bfcbb63de704ab03c66324",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/registry/presets-and-backups.json",
+      "sha256": "4d7b2a18169466a0b92400bc7c790d83f7337d203665475343b5d5e7194c42c0",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/registry/troubleshooting.json",
+      "sha256": "b2becac1031b2decc94b5242a9e4040326266abeb28f7b60270d3ab3c67d9d03",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/registry/weights-and-rank.json",
+      "sha256": "d42f489744ce8264a99c50dffb50c8c11d5823aa5381ce62c1af6a8a6fc6e3fb",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/ru/adding-loras.md",
+      "sha256": "ff2e69b93ee557cb5bc96b621203de5b5ad5233946aadaa3af8b3f882c55bc1d",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/ru/block-and-elemental.md",
+      "sha256": "3aa6f861e20dc69ec8ebe0430553f4a4c4e329fdbd2a0dd269f102224df8aa8d",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/ru/curves-and-timing.md",
+      "sha256": "e319e4e518b3c3f2f52868c8c212a3334f2fd935df8fa5d7e093f7dbecfa8e08",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/ru/getting-started.md",
+      "sha256": "b946ab44124b1065e96aeddec22dd552ddf5997a9c9efaf3516a0aa25f87a870",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/ru/language-and-help.md",
+      "sha256": "6c71bc9d986b8eac125930116afba3a981612c5ed5a8d326e263720a33808cc1",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/ru/metadata-and-sidecars.md",
+      "sha256": "e22cf200314d4b1e6b7a156159186075f5df7b597b1e31e7e59568c7a7945b21",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/ru/presets-and-backups.md",
+      "sha256": "8747ff914b0123078c7615f54071afa2938d8892e18158202c2fcd1d6d92263d",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/ru/troubleshooting.md",
+      "sha256": "e7b8ad7f1fdda564c9c8f2392c4f83d09206053f458ca44fc08fdf8f05a4011d",
+      "role": "runtime"
+    },
+    {
+      "path": "files/extensions-builtin/Lora/help_documentation/ru/weights-and-rank.md",
+      "sha256": "c0ebed7de9018497f1d48156cfe02a83c947d2890ef7c46776bcd1e754df4945",
+      "role": "runtime"
+    },
+    {
+      "path": "files/test/lora_studio_help.test.cjs",
+      "sha256": "ee9999afb48684aa4048a3695306c40e14dbb5744a162d167499f39876a31af7",
+      "role": "test"
+    }
+  ],
+  "operations": [
+    {
+      "path": "extensions-builtin/Lora/extra_networks_lora.py",
+      "asset": "files/extensions-builtin/Lora/extra_networks_lora.py",
+      "kind": "replace",
+      "known_before": [
+        "e7760213744594e87a1b906ce3bfd123abc1a5dcc2b0f9f07c37a6c629080fb8"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/lora.py",
+      "asset": "files/extensions-builtin/Lora/lora.py",
+      "kind": "replace",
+      "known_before": [
+        "444e6a40aea3e184599847c71f79e0daeb7207c26524819af2988a45f49956ea"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/lora_advanced.py",
+      "asset": "files/extensions-builtin/Lora/lora_advanced.py",
+      "kind": "replace",
+      "known_before": [
+        "cddbbedc01e079ea95709444a62ac652656aa0596e15268d0589b2e8fa7e07a5"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/lora_coverage.py",
+      "asset": "files/extensions-builtin/Lora/lora_coverage.py",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/lora_logger.py",
+      "asset": "files/extensions-builtin/Lora/lora_logger.py",
+      "kind": "replace",
+      "known_before": [
+        "ab682ac60c1f28caaf399d4f0ce7f66ea23896df64613f8391ea332d82932516"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/lora_patches.py",
+      "asset": "files/extensions-builtin/Lora/lora_patches.py",
+      "kind": "replace",
+      "known_before": [
+        "a44427eb6198e43437d381e18b4287fd382062ed91dd13a945d08af9a05160b1",
+        "d5dc01dd5c90a0cb0ab5940627b60fe4c07e92c706f0c7930fa3325c94f793ef"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/lora_presets.py",
+      "asset": "files/extensions-builtin/Lora/lora_presets.py",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/lora_runtime.py",
+      "asset": "files/extensions-builtin/Lora/lora_runtime.py",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/lora_schema.py",
+      "asset": "files/extensions-builtin/Lora/lora_schema.py",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/lora_sidecars.py",
+      "asset": "files/extensions-builtin/Lora/lora_sidecars.py",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/lyco_helpers.py",
+      "asset": "files/extensions-builtin/Lora/lyco_helpers.py",
+      "kind": "replace",
+      "known_before": [
+        "cb5dc7f8708eccafd7d44e94042a992875dd80a4ed58d53af0a3fa5cccb22166"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/network.py",
+      "asset": "files/extensions-builtin/Lora/network.py",
+      "kind": "replace",
+      "known_before": [
+        "00f835b5d48f9e35de1ef01f0b4d97153d935948b69ab220031c42a6bff9684a",
+        "606b739d16d0600a5a3bef3709343aeb904803ee05868a6d158ee4ccea722633",
+        "6655492c7bc431459c1ec452cf17d4859aedec011d06ea3e7edfdf16904ee312",
+        "6de7b3f166a18fb50aa0f760e5df21c3533c6a25b94f8def0cca38f7dc430578",
+        "73b6672a1c5b4a338bab6333677625e30eae47f5774a35d0574790079b74aa7f",
+        "97da3987f0e22f7da6300de2597e44b139e7b62129adedddb789d88dc4c9133a",
+        "f7eea30d5ef9663310c6e6a4604b64cbaf8dea1e606071a46f7fe62a49462a4a"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/network_full.py",
+      "asset": "files/extensions-builtin/Lora/network_full.py",
+      "kind": "replace",
+      "known_before": [
+        "726271948befc66ec5b5443412ddb56791178ed69f441be9d49b19f789e740cd",
+        "ce1a05c81b2fc2208bd73dc3f92a144e4169d904cdbc41da38026fa7ed637efc"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/network_glora.py",
+      "asset": "files/extensions-builtin/Lora/network_glora.py",
+      "kind": "replace",
+      "known_before": [
+        "9060b6fa2f935f502d3ba46e825f64f12607d1bee95a351d7a85f67873980b83",
+        "d79d9d73cdc6f3c9ab35de54d59eafdf99b04ae320256bac6390d4f9e6a3224b"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/network_hada.py",
+      "asset": "files/extensions-builtin/Lora/network_hada.py",
+      "kind": "replace",
+      "known_before": [
+        "5fd55104a525bd271b040e0b4fc99d0dc0585bfffadc1dad30361a335d6b4b44",
+        "7fd4ebf461c4fa177180a48584c456788f7c7a229b5c56c5096e25d77d95c70f"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/network_ia3.py",
+      "asset": "files/extensions-builtin/Lora/network_ia3.py",
+      "kind": "replace",
+      "known_before": [
+        "163ed5f5d4bebe3e0bf222f9cab6958ea47d39e6b65dda77d1e458ac9ac5577f",
+        "5c74dcd92296ed5dcc6e9f85286bc4887c87dfb7ddc2db8f1ee95e979b6cc85a"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/network_lokr.py",
+      "asset": "files/extensions-builtin/Lora/network_lokr.py",
+      "kind": "replace",
+      "known_before": [
+        "39b550f1bb3599ad4405cf11c42b045895dc4152e1f5ec33d68e8969a9b8fbb5",
+        "db81cada8d445f289dce543a861dfefb13816eb0d0b1218164e582e40b671f5d"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/network_lora.py",
+      "asset": "files/extensions-builtin/Lora/network_lora.py",
+      "kind": "replace",
+      "known_before": [
+        "2228a6ab5929c14e6e40253f9f9004d5aac5b2615763e9bd3ba36ddda9557a4c",
+        "69c98795f24f71226b4961536261d6bcd7c0a099936b505bf023a30cbfdedc7e",
+        "9e10fd25390baecb3f79f4edca4187537c14c3114b1700069e930d062ac65a54",
+        "f0711258599ae2caca5a6573654b0f1b453205f5de975e3beca49ad9662d4ad1"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/network_norm.py",
+      "asset": "files/extensions-builtin/Lora/network_norm.py",
+      "kind": "replace",
+      "known_before": [
+        "6ef6a220d84f864698e670651ad4c4e1357ebca54c7d98e880efb7e6b58dd109",
+        "ae8545847b3cab1f0b06a292f763e7eaa746544f742574a757ca2dc2c98acbea"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/network_oft.py",
+      "asset": "files/extensions-builtin/Lora/network_oft.py",
+      "kind": "replace",
+      "known_before": [
+        "2aec107e558fbf07ed6b1cc5cdc3363b42c1d90e2c055d30064a6017da27989f",
+        "d52ef3250126d2f46d4d6f0286178cc6bde471907505954055dfcf1fe79ef747"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/networks.py",
+      "asset": "files/extensions-builtin/Lora/networks.py",
+      "kind": "replace",
+      "known_before": [
+        "18857acf7a40680844072fa8402ebf2d223d115c52af2959759dd65e02c4e341",
+        "277ea2b96c383512858a852920a143ea6c13c1a306cf97e8b0ed45d049556f19",
+        "317a9b17dea62539fe32862ac0aaa1be6f50899bbf78f215d6f1b1f033faff1f",
+        "37594d6c637af6fadc466ededb7e10d9d7cbe812027862c74f46daf2af43c82d",
+        "4d26b909f3bacfa2d375ac769e1196b0b21ff8ce40c2d511b77c1234a83f3e91",
+        "6f790449538e1ddfed89dee29185bbe1076dec1db8eb67dac8957e5642c0e40a",
+        "7007a3fb83efb1c8f63f97446448cf52fb60580a5502f7ad07e378919f7525de",
+        "7239dc4eb236549af680f02f7c9b3398ebe655923bb902650fd949c3b378fbb4",
+        "9f150a67995e13d95c9c029e524f1ee66046d019ac54f34f1179d7933571103e",
+        "b878c7cbc33b8ec0e05cc3d7e2a51ccd726aad1b71e46519a876c5a1cb142890",
+        "e84b6013ff3f71d4a97927d1577d89eeaad394f25e4e405ed4aa442b94835a91"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/preload.py",
+      "asset": "files/extensions-builtin/Lora/preload.py",
+      "kind": "replace",
+      "known_before": [
+        "7149819913070d6cfb039c07dc08fefa94370730ac64eb1959887a460bec1147"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/scripts/lora_script.py",
+      "asset": "files/extensions-builtin/Lora/scripts/lora_script.py",
+      "kind": "replace",
+      "known_before": [
+        "5f525304c53819952b69895aa5e0959694122aef35d843fcece41226b44483d0",
+        "7773cb608e5c6d61f8bb95040976050e74b18d9a0ec29dbffa499c48182c5868",
+        "92128c6db70df5a70daf79ab9423254c6ad7def5f2429226340e29c9269eb1b0",
+        "df597271b7221cd1811db8009c2b675d795fc96cc72b18caad63437171a77086",
+        "e31deb6b8d01ea1e3b069d51267e8270909cec02b37a61abb63f4cedae7bda14"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/ui_edit_user_metadata.py",
+      "asset": "files/extensions-builtin/Lora/ui_edit_user_metadata.py",
+      "kind": "replace",
+      "known_before": [
+        "4f0ba69c737ed80b619d463bb9bfb0c52aaa01e826c5fb54156a133c7851ad23"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/ui_extra_networks_lora.py",
+      "asset": "files/extensions-builtin/Lora/ui_extra_networks_lora.py",
+      "kind": "replace",
+      "known_before": [
+        "5e54d362a06281d645cf1eb32c894b482f2fdafe749fc468c0663e0bb6a55cb2",
+        "67cee1488b057529131f9e04e897db8f917ee9a50245bfc524e3a394599ef0d4"
+      ]
+    },
+    {
+      "path": "html/extra-networks-card.html",
+      "asset": "files/html/extra-networks-card.html",
+      "kind": "replace",
+      "known_before": [
+        "7770ef43fe06cbc8026fcbc9298c94a8d91b2ba55c9199566f5df3b0871750b7"
+      ]
+    },
+    {
+      "path": "html/extra-networks-copy-path-button.html",
+      "asset": "files/html/extra-networks-copy-path-button.html",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "html/extra-networks-edit-item-button.html",
+      "asset": "files/html/extra-networks-edit-item-button.html",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "html/extra-networks-metadata-button.html",
+      "asset": "files/html/extra-networks-metadata-button.html",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "html/extra-networks-no-cards.html",
+      "asset": "files/html/extra-networks-no-cards.html",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "html/extra-networks-pane-dirs.html",
+      "asset": "files/html/extra-networks-pane-dirs.html",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "html/extra-networks-pane-tree.html",
+      "asset": "files/html/extra-networks-pane-tree.html",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "html/extra-networks-pane.html",
+      "asset": "files/html/extra-networks-pane.html",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "html/extra-networks-tree-button.html",
+      "asset": "files/html/extra-networks-tree-button.html",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "javascript/extraNetworks.js",
+      "asset": "files/javascript/extraNetworks.js",
+      "kind": "replace",
+      "known_before": [
+        "16962cbfb7d03ceb3ebbc8bff1a1e7b91a400fd52f655c0a4d7306e7e56a74d0",
+        "613ec0d66f7828d1c6cd25542fb0cd56ec6c3c40b26f8d7446b5df10374b439f",
+        "8c7c895d5ad3496b2423206a997a3f16f7d52156ee32bedb99b00ba26a679771"
+      ]
+    },
+    {
+      "path": "javascript/loraStudioBlocks.js",
+      "asset": "files/javascript/loraStudioBlocks.js",
+      "kind": "replace",
+      "known_before": [
+        "775ab723e1369f167324b9c97400404c41431acc588cc8424677f78164cd62ed"
+      ]
+    },
+    {
+      "path": "javascript/loraStudioCurves.js",
+      "asset": "files/javascript/loraStudioCurves.js",
+      "kind": "replace",
+      "known_before": [
+        "5f7bff23874c8801a79839db3190c2a1476aed4efb15766ca1edfe29cc7e6d12"
+      ]
+    },
+    {
+      "path": "javascript/loraStudioMetadata.js",
+      "asset": "files/javascript/loraStudioMetadata.js",
+      "kind": "replace",
+      "known_before": [
+        "e30bf2110a5026b75c29b48914f3242b946e1bd666cff4c992a68cd72697311d"
+      ]
+    },
+    {
+      "path": "javascript/loraStudioModel.js",
+      "asset": "files/javascript/loraStudioModel.js",
+      "kind": "replace",
+      "known_before": [
+        "1bc037390c899cf0898b7c72a7adcc0feca6400a6775cc859f18a21fe0f10991",
+        "53113df8d011ab1cb8d2573610f9e20071bfc001a4b3b0f181097a13e9c0ff4c"
+      ]
+    },
+    {
+      "path": "javascript/loraStudioPresets.js",
+      "asset": "files/javascript/loraStudioPresets.js",
+      "kind": "replace",
+      "known_before": [
+        "49ddd482435ad7100f05796c55173d8e0e03f287edcdb39bb98965b1f72cdb69",
+        "6f2a6ff1a5cf4a004532d99cd35e2298d816ca89b55276659e0d00f445d14f38"
+      ]
+    },
+    {
+      "path": "javascript/loraStudioView.js",
+      "asset": "files/javascript/loraStudioView.js",
+      "kind": "replace",
+      "known_before": [
+        "118c26a6b35e8dd4c55c1eba9d93a16f755cbcc0dd32d9d5ac4cdccd2fe0a718",
+        "3c605b029c0b2b6249f6e8112485882a070b3c7752019fd780a08891c31c7b2e",
+        "413bbd899e393b7e47133fca1c8d6aca9079a66af7288a1abea9d6bf89a603fa",
+        "656abf37971e65276461b9f2b43d184b0c32afde3057d28108f2ae0da1529542",
+        "96609433629a737be49d011463e3d63716c09157557c6131a74cc151460bfcaa"
+      ]
+    },
+    {
+      "path": "modules/extra_networks.py",
+      "asset": "files/modules/extra_networks.py",
+      "kind": "replace",
+      "known_before": [
+        "87796cebf12940e5efab866343ec43403c1a29a83f04df5d8ff24f28aa7acc8d"
+      ]
+    },
+    {
+      "path": "modules/sd_models.py",
+      "asset": "files/modules/sd_models.py",
+      "kind": "replace",
+      "known_before": [
+        "09750e83ef3bd423bfec762f351ecfd34851ea3268cdd6f3be8a9e96dcd27b6c",
+        "34d40fa753f1a53aeee9084cf67c2f28ff201738d1d8cb96ae09a5ed429674f9",
+        "37c0aa199d23c4cb10294dc68993697a2256422678c56d182d91d08829941426",
+        "717e38ad98c64b110eb35f30c26e01e333ebab62b6a4f89280ed9d675ec3058f",
+        "7923cbb33ec8d8e3793f87d74c54d21d03a64a91643d04c865ffd322649c8728"
+      ]
+    },
+    {
+      "path": "modules/ui_extra_networks.py",
+      "asset": "files/modules/ui_extra_networks.py",
+      "kind": "replace",
+      "known_before": [
+        "48b340a7716a474dd8d0842b739f21bdfb53684831bca894a7b333162d7948cb"
+      ]
+    },
+    {
+      "path": "style.css",
+      "asset": "files/style.css",
+      "kind": "replace",
+      "known_before": [
+        "6110a3f0d7db489c2cb42651b25baeea3fa0c8ca37b034a622b450c5f76923c9",
+        "b7d3f2459d154010973560652b0812b4496d56a4679bbf45e108a33b182727f8",
+        "ba3ac17168f3d946e539972a5271b11040a2401d7ba24d7d178ed9c4b158c250",
+        "e70db261be5a70a24a63ad1e2c6c6bc3dbdd6edb21d08035d506604054505862",
+        "d5bb38df09ce5723d243d193b63de291effb1981e1c9913d7a289848a75ed9bc"
+      ]
+    },
+    {
+      "path": "modules/processing.py",
+      "asset": "patches/processing-hires.json",
+      "kind": "text-patch",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/lora_keys.py",
+      "asset": "files/extensions-builtin/Lora/lora_keys.py",
+      "kind": "replace",
+      "known_before": [
+        "e6b5c9df49ffc7c8df2799af606963148850c4670f3b96d9222f3da64c8eb709"
+      ]
+    },
+    {
+      "path": "modules/sd_disable_initialization.py",
+      "asset": "files/modules/sd_disable_initialization.py",
+      "kind": "replace",
+      "known_before": [
+        "496be6347f043777db69cf09cd24772ec156be70c69085d8163edfe59bc9503a",
+        "53d6f9acfdfc7ecda4fb2e6644d2b9d7bbf2622d49c2afa21f6db25f57867a54",
+        "e731d2b21d84f7372b902b1dc3e26e34101eaac214da0ef40ad4fce0d51f4ab4"
+      ]
+    },
+    {
+      "path": "modules/devices.py",
+      "asset": "files/modules/devices.py",
+      "kind": "replace",
+      "known_before": [
+        "6ec270d435445fc81101060bffff6220700355db6743bb5996dba20931b3558d",
+        "96d64bf388690c8001b3a233747051e4e83bcc7da5b7d2a0a64085dd37a7e77f"
+      ]
+    },
+    {
+      "path": "modules/patches.py",
+      "asset": "files/modules/patches.py",
+      "kind": "replace",
+      "known_before": [
+        "55f0d7e89d5faf3202b3f4ebaeb2d3762f639cda9ddeb149f8e038051a743f75",
+        "d1fe5b865e9af3dc28ba5ea92df79531ee5df3224fedea554a31735fc8ae2b50"
+      ]
+    },
+    {
+      "path": "modules/textual_inversion/textual_inversion.py",
+      "asset": "files/modules/textual_inversion/textual_inversion.py",
+      "kind": "replace",
+      "known_before": [
+        "28468539d1a284971e3dd8b3da1f93ec502baa3096db9e21d14c0bc9b0c722cf",
+        "4b6aa25a3bde2319105b88e22dfa3da08b8d869aba5fa64bd55e8feeb8d17a7f",
+        "6aab95cf9e7c1a6c1a7748f30a0509b385fb5a231a6414f518ff0f1cc13cbfde",
+        "92b9a06a4918223c2121751a917477cd4dc5d55cc2a14d4d47ab562e89454b75",
+        "bb62def730b6db228468be7fb09657d003f6546ecf21eb4700658a758b2e1550",
+        "f0b4e08d97b6c5fa84297e6eeff532b9d2d8a1e4fe5631330aacfe3325ddf1b9"
+      ]
+    },
+    {
+      "path": "modules/safe.py",
+      "asset": "files/modules/safe.py",
+      "kind": "replace",
+      "known_before": [
+        "08c3d36d52f986db525e0f614418592e18a9fab19ef587f3bd8291c0451f129d"
+      ]
+    },
+    {
+      "path": "modules/sd_vae.py",
+      "asset": "files/modules/sd_vae.py",
+      "kind": "replace",
+      "known_before": [
+        "964c5ab6f6736e4f756e4d0726ecc6add503644eba5ba6ab05dacc1de5b45092",
+        "b0da05f91329f84cd40897cac38d2abd4b7caa50208be7ed2082e90522f09193"
+      ]
+    },
+    {
+      "path": "extensions-builtin/Lora/lora_studio_access.py",
+      "asset": "files/extensions-builtin/Lora/lora_studio_access.py",
+      "kind": "replace",
+      "known_before": [
+        "06a60eb42916cdd848901eeecb04e545921ffbc85c62d6ec11614f96f2e057ce"
+      ]
+    },
+    {
+      "path": "modules/options.py",
+      "asset": "files/modules/options.py",
+      "kind": "replace",
+      "known_before": [
+        "2ec7eced985215594a8d9e4c001dd4362584cd12e9e76531e02e8360a5260de3",
+        "31c93456fe626db9a3fcbbad02dcd0d4df0d7ccf185b388cef0636ad27b0479c",
+        "63f2e1e7f903664bbda256e30006a7e8618dc2df9c91ed80a086ab2e427e3e93",
+        "b885e88c0afb07e81af21e6fd57bf1338bc97d95507e4b7007281e3cffaafc8b"
+      ]
+    },
+    {
+      "path": "modules/config_store.py",
+      "asset": "files/modules/config_store.py",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "modules/lowvram.py",
+      "asset": "files/modules/lowvram.py",
+      "kind": "replace",
+      "known_before": [
+        "d6e8fdc1116883ac1dd8a650711d28c32ecd8f04a1bf735a841418dc80fca2be"
+      ]
+    },
+    {
+      "path": "modules/sd_emphasis.py",
+      "asset": "files/modules/sd_emphasis.py",
+      "kind": "replace",
+      "known_before": [
+        "e3d6aed4f149ffcfeb9c760997e07d1a2691249e927d19a245f843adfd15fa83"
+      ]
+    },
+    {
+      "path": "modules/asset_files.py",
+      "asset": "files/modules/asset_files.py",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "modules/sd_models_config.py",
+      "asset": "files/modules/sd_models_config.py",
+      "kind": "replace",
+      "known_before": [
+        "82b9ec3e31371259affe2dee1d01aa476919b62d800b089b759618bcbc998237"
+      ]
+    },
+    {
+      "path": "modules/sd_hijack_clip_old.py",
+      "asset": "files/modules/sd_hijack_clip_old.py",
+      "kind": "replace",
+      "known_before": [
+        "313d49f3dba749192b6c4244af58ca9c65a1259012d7839d60ed7b23816c31ad"
+      ]
+    },
+    {
+      "path": "modules/region_utils.py",
+      "asset": "files/modules/region_utils.py",
+      "kind": "replace",
+      "known_before": [
+        "9535a871bc4caac66dfaec027be6f38ca0e34f6c09ab8249eefd18c4a6c51d24",
+        "c29f1fd4ee273305ff85268b9d3bdbf2cddbe20839d9ccd84d8e3142961a7a5d"
+      ]
+    },
+    {
+      "path": "modules/ui_settings.py",
+      "asset": "files/modules/ui_settings.py",
+      "kind": "replace",
+      "known_before": [
+        "a3941ec3efa4ce908494e02c44120b2be2a26a1700ed49649b0ed583d58c4518"
+      ]
+    },
+    {
+      "path": "modules/shared_options.py",
+      "asset": "files/modules/shared_options.py",
+      "kind": "replace",
+      "known_before": [
+        "120777d2bf968764a88cf942b3e8d9a9a299c7b3713f79ba248f2c73d3605b23"
+      ]
+    },
+    {
+      "kind": "replace",
+      "path": "modules/cache.py",
+      "asset": "files/modules/cache.py",
+      "known_before": [
+        "218793cdf2a478089a05e37c4cc16b525ad11c211b4f119f24aa75475108786b"
+      ]
+    },
+    {
+      "kind": "replace",
+      "path": "modules/hashes.py",
+      "asset": "files/modules/hashes.py",
+      "known_before": [
+        "ed8ea21071a6169f41cc1f51004e5fd9c30eb12b71256c126cb7c487b6d41eca"
+      ]
+    },
+    {
+      "kind": "replace",
+      "path": "modules/api/api.py",
+      "asset": "files/modules/api/api.py",
+      "known_before": [
+        "af75abe439eda64e5e3ed5e6e1f968f15bf9ddc0c5c41aa881917f358fd13750"
+      ]
+    },
+    {
+      "path": "javascript/loraStudioI18n.js",
+      "asset": "files/javascript/loraStudioI18n.js",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "javascript/loraStudioLocaleDe.js",
+      "asset": "files/javascript/loraStudioLocaleDe.js",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "javascript/loraStudioLocaleEn.js",
+      "asset": "files/javascript/loraStudioLocaleEn.js",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "javascript/loraStudioLocaleEs.js",
+      "asset": "files/javascript/loraStudioLocaleEs.js",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "javascript/loraStudioLocaleFr.js",
+      "asset": "files/javascript/loraStudioLocaleFr.js",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "javascript/loraStudioLocaleIt.js",
+      "asset": "files/javascript/loraStudioLocaleIt.js",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "javascript/loraStudioLocaleJa.js",
+      "asset": "files/javascript/loraStudioLocaleJa.js",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "javascript/loraStudioLocaleKo.js",
+      "asset": "files/javascript/loraStudioLocaleKo.js",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "javascript/loraStudioLocalePtBr.js",
+      "asset": "files/javascript/loraStudioLocalePtBr.js",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "javascript/loraStudioLocaleRu.js",
+      "asset": "files/javascript/loraStudioLocaleRu.js",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "javascript/loraStudioLocaleZhCn.js",
+      "asset": "files/javascript/loraStudioLocaleZhCn.js",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/lora_help_registry.py",
+      "asset": "files/extensions-builtin/Lora/lora_help_registry.py",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "javascript/loraStudioHelp.js",
+      "asset": "files/javascript/loraStudioHelp.js",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/en/adding-loras.md",
+      "asset": "files/extensions-builtin/Lora/help_documentation/en/adding-loras.md",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/en/block-and-elemental.md",
+      "asset": "files/extensions-builtin/Lora/help_documentation/en/block-and-elemental.md",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/en/curves-and-timing.md",
+      "asset": "files/extensions-builtin/Lora/help_documentation/en/curves-and-timing.md",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/en/getting-started.md",
+      "asset": "files/extensions-builtin/Lora/help_documentation/en/getting-started.md",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/en/language-and-help.md",
+      "asset": "files/extensions-builtin/Lora/help_documentation/en/language-and-help.md",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/en/metadata-and-sidecars.md",
+      "asset": "files/extensions-builtin/Lora/help_documentation/en/metadata-and-sidecars.md",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/en/presets-and-backups.md",
+      "asset": "files/extensions-builtin/Lora/help_documentation/en/presets-and-backups.md",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/en/troubleshooting.md",
+      "asset": "files/extensions-builtin/Lora/help_documentation/en/troubleshooting.md",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/en/weights-and-rank.md",
+      "asset": "files/extensions-builtin/Lora/help_documentation/en/weights-and-rank.md",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/registry/adding-loras.json",
+      "asset": "files/extensions-builtin/Lora/help_documentation/registry/adding-loras.json",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/registry/block-and-elemental.json",
+      "asset": "files/extensions-builtin/Lora/help_documentation/registry/block-and-elemental.json",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/registry/curves-and-timing.json",
+      "asset": "files/extensions-builtin/Lora/help_documentation/registry/curves-and-timing.json",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/registry/getting-started.json",
+      "asset": "files/extensions-builtin/Lora/help_documentation/registry/getting-started.json",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/registry/language-and-help.json",
+      "asset": "files/extensions-builtin/Lora/help_documentation/registry/language-and-help.json",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/registry/metadata-and-sidecars.json",
+      "asset": "files/extensions-builtin/Lora/help_documentation/registry/metadata-and-sidecars.json",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/registry/presets-and-backups.json",
+      "asset": "files/extensions-builtin/Lora/help_documentation/registry/presets-and-backups.json",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/registry/troubleshooting.json",
+      "asset": "files/extensions-builtin/Lora/help_documentation/registry/troubleshooting.json",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/registry/weights-and-rank.json",
+      "asset": "files/extensions-builtin/Lora/help_documentation/registry/weights-and-rank.json",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/ru/adding-loras.md",
+      "asset": "files/extensions-builtin/Lora/help_documentation/ru/adding-loras.md",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/ru/block-and-elemental.md",
+      "asset": "files/extensions-builtin/Lora/help_documentation/ru/block-and-elemental.md",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/ru/curves-and-timing.md",
+      "asset": "files/extensions-builtin/Lora/help_documentation/ru/curves-and-timing.md",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/ru/getting-started.md",
+      "asset": "files/extensions-builtin/Lora/help_documentation/ru/getting-started.md",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/ru/language-and-help.md",
+      "asset": "files/extensions-builtin/Lora/help_documentation/ru/language-and-help.md",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/ru/metadata-and-sidecars.md",
+      "asset": "files/extensions-builtin/Lora/help_documentation/ru/metadata-and-sidecars.md",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/ru/presets-and-backups.md",
+      "asset": "files/extensions-builtin/Lora/help_documentation/ru/presets-and-backups.md",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/ru/troubleshooting.md",
+      "asset": "files/extensions-builtin/Lora/help_documentation/ru/troubleshooting.md",
+      "kind": "replace",
+      "known_before": []
+    },
+    {
+      "path": "extensions-builtin/Lora/help_documentation/ru/weights-and-rank.md",
+      "asset": "files/extensions-builtin/Lora/help_documentation/ru/weights-and-rank.md",
+      "kind": "replace",
+      "known_before": []
+    }
+  ],
+  "required_runtime_paths": [
+    "extensions-builtin/Lora/lora_studio_access.py",
+    "extensions-builtin/Lora/network.py",
+    "extensions-builtin/Lora/networks.py",
+    "javascript/loraStudioView.js",
+    "modules/api/api.py",
+    "modules/asset_files.py",
+    "modules/cache.py",
+    "modules/hashes.py",
+    "modules/options.py",
+    "modules/region_utils.py",
+    "javascript/loraStudioI18n.js",
+    "javascript/loraStudioLocaleDe.js",
+    "javascript/loraStudioLocaleEn.js",
+    "javascript/loraStudioLocaleEs.js",
+    "javascript/loraStudioLocaleFr.js",
+    "javascript/loraStudioLocaleIt.js",
+    "javascript/loraStudioLocaleJa.js",
+    "javascript/loraStudioLocaleKo.js",
+    "javascript/loraStudioLocalePtBr.js",
+    "javascript/loraStudioLocaleRu.js",
+    "javascript/loraStudioLocaleZhCn.js",
+    "extensions-builtin/Lora/lora_help_registry.py",
+    "javascript/loraStudioHelp.js"
+  ],
+  "documentation_operations": [
+    {
+      "path": "extensions-builtin/Lora/ADVANCED_PROMPT_CONTROLS.md",
+      "assets": {
+        "EN": "docs/EN/ADVANCED_PROMPT_CONTROLS_EN.md",
+        "RUS": "docs/RUS/ADVANCED_PROMPT_CONTROLS_RUS.md"
+      },
+      "known_before": [],
+      "sha256": {
+        "EN": "bde04cc62a024d07eb0a26e87aa9e5bc971579461aa381f9493d12893d078eb2",
+        "RUS": "efb8152da56a3844bcfecf30a0777a869d3f90dcf8abaf46945a388286e5f5b9"
+      }
+    },
+    {
+      "path": "extensions-builtin/Lora/LORA_EVOLUTION_PLAN.md",
+      "assets": {
+        "EN": "docs/EN/LORA_EVOLUTION_PLAN_EN.md",
+        "RUS": "docs/RUS/LORA_EVOLUTION_PLAN_RUS.md"
+      },
+      "known_before": [
+        "000e2584ee1b51f8fca1d6b69735e9b33bf831393070f9cc6296133803a4e117",
+        "639bc914f877f492922fc4b60671ca103976e5fd848faad8f92bfeadbfcc7c73",
+        "831a230f2bbfd7ed8e1a39c0b60019334e8bda116c427e95a8fff76e373e37cc",
+        "8e9eb806bd09661db847665496a2224276bbf8346d9d42ee6e4def5d562b6e8e",
+        "da6d2b61303ab7f71843eddd14f59790ca53090ad3f2a942f65954247ff8bd5e",
+        "e8a5fbda5ec6c4cd4e44f9bc434ca225cccabcf1f0882e497072e576c0f466bb",
+        "ffcc1afef0860273398ed685a158b69bad73d074b711a20dce37c8c03e32cdcb"
+      ],
+      "sha256": {
+        "EN": "7c137ebc383db40d5e8c212cef754259e7789dcbbdc6277572c11261d5c8a938",
+        "RUS": "9ec0d8b3b2037301a907a34aadf88262146a8c438f4e87c312ec865df61fb67c"
+      }
+    },
+    {
+      "path": "extensions-builtin/Lora/LORA_LOADING_FIXES.md",
+      "assets": {
+        "EN": "docs/EN/LORA_LOADING_FIXES_EN.md",
+        "RUS": "docs/RUS/LORA_LOADING_FIXES_RUS.md"
+      },
+      "known_before": [],
+      "sha256": {
+        "EN": "7989182d9d3bc7ee2ad5de60ea64831f25c07e402b8d16e18ee9d7b692cd0553",
+        "RUS": "5065f905b53f979fc31896567a3916660dc481a3d262d0a458412fe01ec2dfb5"
+      }
+    },
+    {
+      "path": "extensions-builtin/Lora/LORA_STUDIO_ARCHITECTURE.md",
+      "assets": {
+        "EN": "docs/EN/LORA_STUDIO_ARCHITECTURE_EN.md",
+        "RUS": "docs/RUS/LORA_STUDIO_ARCHITECTURE_RUS.md"
+      },
+      "known_before": [
+        "bf5ba9f9e4e240078333d91fc2a5b6826a4500388664db0c292ea04b35f0a0a4"
+      ],
+      "sha256": {
+        "EN": "ae0bce7e8b818778e05bc215a733a6ffaa467cda6a952e7a9eaed535e8a3983e",
+        "RUS": "16369e1c912a0ecb1698b90d9fd0f5787fc38c7246a010f9adbfa460a7772d46"
+      }
+    },
+    {
+      "path": "extensions-builtin/Lora/LORA_STUDIO_SMOKE_TEST.md",
+      "assets": {
+        "EN": "docs/EN/LORA_STUDIO_SMOKE_TEST_EN.md",
+        "RUS": "docs/RUS/LORA_STUDIO_SMOKE_TEST_RUS.md"
+      },
+      "known_before": [
+        "2d6b162a5b1cb521f310e93fd4b8fe113d8a90a1767098a9e902ddf4f41cf470",
+        "62d1e7f0edb5bdcb4cc0045c5e816205f8ca5282d0548cfe312b910170207ed8"
+      ],
+      "sha256": {
+        "EN": "7e5bb2c721fc53760327468773c11e28a678eab2d868c74d1c06f49cd3a36940",
+        "RUS": "92bac0b2afda7ef952e4e1422868918662be42f06c28c3d512ffdaca2355ce3e"
+      }
+    },
+    {
+      "path": "extensions-builtin/Lora/RUNTIME_STABILITY_FIXES.md",
+      "assets": {
+        "EN": "docs/EN/RUNTIME_STABILITY_FIXES_EN.md",
+        "RUS": "docs/RUS/RUNTIME_STABILITY_FIXES_RUS.md"
+      },
+      "known_before": [
+        "1673ef4644098156255cbb539205d8e464e474ff522a15dcdc30c1f743536785",
+        "18f1c9581cd21d47cd7f4bbd9f068edf8471e48740fb54145706a18cb3d91f53",
+        "3bc789ac6c15a716ce3d60da86c8e40f6530ce1ee76e57e9d38d4b6018ecd211",
+        "6ac21a2cc01749fea073f3f825e7fbb9e62bd15b32fe5e0ff5d3b9d3b048d4bb",
+        "9abd982f28f538b59b1dbe939970daa482a45d44ed901625afd1c1444120499f",
+        "a631f4533bc0b1a2b08642dc8e5786681f6108367efce2b02304ac316c133964",
+        "ac62272ee057d4228d3011ffced4328ce6edaf6058e1218822ae68f30169e198",
+        "e48ece12071a33dc371d30c1a65542f9245a7d1ff208f01fec7efc135ae827c5",
+        "f14162e519365c8ed3693bbe27b42ca0b89667137ac8357bb3bd5d2100d262d0"
+      ],
+      "sha256": {
+        "EN": "b29f678b504dc45320a139176eb5f6b4c080ce97c38a31d681ab2626d7e80e7f",
+        "RUS": "3d7ba61b91ace169292d0da95c25fab12a53c3a66c800ac149ec92fab8a1ae20"
+      }
+    }
+  ]
+}

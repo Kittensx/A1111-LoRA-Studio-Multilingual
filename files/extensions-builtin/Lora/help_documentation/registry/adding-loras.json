@@ -1,0 +1,16 @@
+{
+  "related": [
+    "getting-started",
+    "weights-and-rank",
+    "troubleshooting"
+  ],
+  "contexts": [
+    "studio.add",
+    "studio.list"
+  ],
+  "order": 2,
+  "tags": [
+    "tags",
+    "drafts"
+  ]
+}
