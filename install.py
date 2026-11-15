@@ -24,6 +24,21 @@ class InstallError(Exception):
     pass
 
 
+class PackageIntegrityError(InstallError):
+    """One aggregated report; no damaged package may be installed."""
+
+    def __init__(self, issues, label="Package integrity check failed"):
+        self.issues = tuple(issues)
+        lines = [f"{label}: {len(self.issues)} file(s):"]
+        for item in self.issues:
+            details = item["diagnosis"]
+            if item["actual"] is not None:
+                details += f' (expected {item["expected"][:12]}..., actual {item["actual"][:12]}...)'
+            lines.append(f'  - {item["path"]}: {details}')
+        lines.append("No files were modified. Restore the intended bytes; do not blindly regenerate the manifest.")
+        super().__init__("\n".join(lines))
+
+
 def digest(data):
     return hashlib.sha256(data).hexdigest()
 
@@ -98,6 +113,47 @@ def file_hash(path):
     return digest(path.read_bytes())
 
 
+def asset_integrity_issues(package, assets):
+    """Audit all expected bytes, without modifying files or relaxing SHA-256.
+
+    Line-ending hints are reported only when the bytes become an *exact* SHA
+    match after CRLF/LF conversion. A hint is not permission to auto-rewrite.
+    """
+    issues = []
+    for asset in assets:
+        name, expected = asset["path"], asset["sha256"]
+        path = child(package, name)  # Enforces path and symlink protections.
+        if not path.exists():
+            issues.append({"path": name, "expected": expected, "actual": None,
+                           "diagnosis": "missing"})
+            continue
+        if not path.is_file():
+            raise InstallError(f"Expected a regular file: {path}")
+        data = path.read_bytes()
+        actual = digest(data)
+        if actual == expected:
+            continue
+        lf_data = data.replace(b"\r\n", b"\n")
+        crlf_data = lf_data.replace(b"\n", b"\r\n")
+        if lf_data != data and digest(lf_data) == expected:
+            diagnosis = "line endings changed (found CRLF; manifest expects LF)"
+        elif crlf_data != data and digest(crlf_data) == expected:
+            diagnosis = "line endings changed (found LF/mixed; manifest expects CRLF)"
+        else:
+            diagnosis = "content/bytes differ (not solely CRLF/LF conversion)"
+        issues.append({"path": name, "expected": expected, "actual": actual,
+                       "diagnosis": diagnosis})
+    return issues
+
+
+def optional_document_integrity_issues(package, manifest):
+    """Check optional documentation independently from runtime verification."""
+    assets = [{"path": entry["assets"][language], "sha256": entry["sha256"][language]}
+              for entry in manifest.get("documentation_operations", [])
+              for language in ("EN", "RUS")]
+    return asset_integrity_issues(package, assets)
+
+
 HELP_LOCALES = {"en", "ru", "fr", "es", "it", "ja", "zh-CN", "pt-BR", "de", "ko"}
 HELP_TOPIC = re.compile(r"[a-z][a-z0-9]*(?:-[a-z0-9]+)*\Z")
 
@@ -160,8 +216,6 @@ def verify_package(package=PACKAGE):
         if name.casefold() in seen or not HEX.fullmatch(asset["sha256"]):
             raise InstallError(f"Invalid/duplicate package entry: {name}")
         seen.add(name.casefold())
-        if file_hash(child(package, name)) != asset["sha256"]:
-            raise InstallError(f"Package integrity check failed: {name}")
     asset_names = {a["path"] for a in assets}
     destinations = set()
     for entry in manifest.get("operations", []):
@@ -212,6 +266,9 @@ def verify_package(package=PACKAGE):
     for asset in assets:
         if asset.get('role') == 'runtime' and asset['path'] not in installed_assets:
             raise InstallError(f'Runtime asset is not installed: {asset["path"]}')
+    issues = asset_integrity_issues(package, assets)
+    if issues:
+        raise PackageIntegrityError(issues)
     return manifest
 
 

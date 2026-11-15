@@ -7,10 +7,8 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 import install  # noqa: E402
+from _historical_build_paths import resolve_build_paths
 
-SOURCE = Path('D:/Users/Asus/Music/Musify/test/stable-diffusion-webui-dev')
-BASE = ROOT.parent / 'A1111-LoRA-Studio-Pack-v10'
-BACKUP = Path('D:/AI-tools/lora-audit/before-20261110-combinations')
 CHANGED = (
     'extensions-builtin/Lora/network.py',
     'extensions-builtin/Lora/network_lora.py',
@@ -31,6 +29,13 @@ TESTS = (
 
 
 def build():
+
+    global ROOT, SOURCE, BASE, BACKUP
+    args = resolve_build_paths(11, needs_backup=True,
+                              previous='A1111-LoRA-Studio-Pack-v10',
+                              source_paths=(*CHANGED, *TESTS),
+                              backup_paths=('modules/processing.py',) if 11 == 10 else ())
+    SOURCE, BASE, BACKUP, ROOT = args.source, args.base, args.backup, args.output
     manifest = json.loads(json.dumps(install.verify_package(BASE)))
     assets = {item['path']: item for item in manifest['assets']}
     operations = {item['path']: item for item in manifest['operations']}

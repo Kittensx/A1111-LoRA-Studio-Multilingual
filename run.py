@@ -17,6 +17,7 @@ HELP = """A1111 LoRA Studio Multilingual — package launcher
   python run.py verify
   python run.py docs-audit
   python run.py help-audit
+  python run.py release-verify   (requires a clean committed Git checkout)
   python run.py check PATH_TO_A1111 [--docs-language EN|RUS]
   python run.py install PATH_TO_A1111 [--docs-language EN|RUS] [--yes]
   python run.py backups PATH_TO_A1111
@@ -56,11 +57,9 @@ def docs_audit():
 
     try:
         manifest = install.verify_package(ROOT)
-        for op in manifest.get("documentation_operations", []):
-            for language in ("EN", "RUS"):
-                doc_path = install.child(ROOT, op["assets"][language])
-                if install.file_hash(doc_path) != op["sha256"][language]:
-                    raise install.InstallError(f"Missing or changed optional {language} document: {doc_path}")
+        issues = install.optional_document_integrity_issues(ROOT, manifest)
+        if issues:
+            raise install.PackageIntegrityError(issues, "Optional documentation integrity check failed")
     except (install.InstallError, OSError, KeyError, ValueError) as error:
         print(f"ERROR: {error}", file=sys.stderr)
         return 1
@@ -99,6 +98,11 @@ def main(argv):
             print("ERROR: docs-audit accepts no additional arguments.", file=sys.stderr)
             return 2
         return docs_audit()
+    if command == "release-verify":
+        if args:
+            print("ERROR: release-verify accepts no additional arguments.", file=sys.stderr)
+            return 2
+        return execute([sys.executable, "-B", str(ROOT / "tools" / "verify_git_archive.py")])
     if command == "test":
         if args:
             print("ERROR: test accepts no additional arguments.", file=sys.stderr)

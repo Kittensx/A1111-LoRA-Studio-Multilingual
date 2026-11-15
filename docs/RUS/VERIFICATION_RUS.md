@@ -2,7 +2,7 @@
 
 Тестовая база: локальный `stable-diffusion-webui-dev.zip` с наложением локального
 `modules.zip`. Это не та же композиция базы, что в независимом Linux-аудите.
-Новая копия: `D:/AI-tools/lora-audit/tmp/lora-v15-installed-kha0e4qa`.
+Новая копия: `<HISTORICAL_AUDIT_ROOT>/tmp/lora-v15-installed-kha0e4qa`.
 Журнал: `evidence/v15-installed-smoke-accepted.log`.
 
 - 142 Torch CPU runtime PASS, включая 8 новых asset-identity сценариев и
@@ -71,7 +71,7 @@ Runtime modules из reference/verification-only поверх установки
 - Rollback: восстановлены/убраны 56 изменённых файлов; проверены исходные байты
   всех затронутых путей, включая отсутствие добавленных файлов после отката.
 - Сохранённая тестовая копия после отката:
-  `D:\AI-tools\lora-audit\tmp\lora-v12-installed-xggld_54`.
+  `<HISTORICAL_AUDIT_ROOT>/tmp\lora-v12-installed-xggld_54`.
 - Установщик/inspector: 27 методов, 26 PASS / 1 SKIP (ОС запрещает symlink).
   Сообщение Installation interrupted в тесте намеренного сбоя ожидаемо.
 - `install.py check` рабочего проекта: 0 changes, 0 unrecognized; 110 assets,
@@ -88,7 +88,7 @@ Runtime modules из reference/verification-only поверх установки
 Воспроизведение (из корня v12; указать свои существующие пути):
 
 ```text
-python -B tools/post_install_smoke.py --base-zip BASE.zip --modules-zip MODULES.zip --temp-root D:/AI-tools/lora-audit/tmp --torch-python D:/AI-tools/lora-audit/venv/Scripts/python.exe
+python -B tools/post_install_smoke.py --base-zip BASE.zip --modules-zip MODULES.zip --temp-root <HISTORICAL_AUDIT_ROOT>/tmp --torch-python <HISTORICAL_AUDIT_ROOT>/venv/Scripts/python.exe
 python -B -m unittest discover -s tests
 python -B install.py verify
 ```
@@ -205,7 +205,7 @@ forged/session-without-auth, no-auth и cross-origin write. Настоящий G
 официальным исходником, в тестах app.auth/app.tokens подменены. Не заявлять
 проверенную интеграцию произвольных версий Gradio или reverse proxy.
 
-Backup: D:\AI-tools\lora-audit\before-20261105-a1-a5.
+Backup: <HISTORICAL_AUDIT_ROOT>/before-20261105-a1-a5.
 Полностью сохранены v8 и ZIP. UI, VAE implementation, defaults и lyco_helpers.py
 не менялись. Ничего не устанавливалось. Независимый TI test обновлён для нового
 раннего отказа: вместо prebuilt stub используется production import с реальными
@@ -237,7 +237,7 @@ resolve до изменения модели не удаляет исправн�
 Новый test_runtime_vae_failures.py: 3 метода, включая 7 mutation failure stages,
 preflight, success/no-op и low-VRAM service-double ветку. Исходный runtime-набор:
 72 PASS. Node 17 PASS, включая 51 DOM assertion. Никаких новых зависимостей.
-Backup: D:\AI-tools\lora-audit\before-20261105-vae-ui.
+Backup: <HISTORICAL_AUDIT_ROOT>/before-20261105-vae-ui.
 
 В настоящем браузере на test/lora_studio_fixture.html: 55 PASS, включая четыре
 режима контраста. Это mock-API стенд, не Gradio. Найдены UX-пробелы по сравнению
@@ -290,7 +290,7 @@ parameter dtype и повреждение прежних .pt/.optim при seria
 assertion, Ruff изменённых Python PASS. Torch 2.10.0+cpu/Python 3.12.10; прежние
 предупреждения об отсутствии NumPy в D-venv и pytest base_url остаются.
 
-Backup до этих изменений: D:\AI-tools\lora-audit\before-20261104-state-io.
+Backup до этих изменений: <HISTORICAL_AUDIT_ROOT>/before-20261104-state-io.
 v6 и его ZIP не изменялись. UI/LoRA defaults/lyco_helpers.py не менялись.
 Ничего не скачивалось и не устанавливалось. План внутри проекта обновлён.
 
@@ -355,7 +355,7 @@ production definitions через AST и подменяют отсутствую
 ## Исходники v6 и восстановление
 
 Исходники уже изменены в рабочем проекте на D:. Снимок существовавших файлов:
-D:\AI-tools\lora-audit\before-20261104-edgecases.
+<HISTORICAL_AUDIT_ROOT>/before-20261104-edgecases.
 Это отдельный прямой backup; это НЕ ID журнала install.py.
 
 v6 основан на v5. v5 и его ZIP сохранены. processing.py остаётся контекстным
@@ -434,7 +434,7 @@ manual_cast оставлял hooks после отказа установки; s
 
 Рабочий проект на D: изменён напрямую. До редактирования сохранены три runtime-
 файла и документация:
-D:\AI-tools\lora-audit\before-20261104-compat
+<HISTORICAL_AUDIT_ROOT>/before-20261104-compat
 
 v5 содержит всё из v4, 80 проверяемых assets и 58 install operations.
 Новая полная замена modules/safe.py разрешена установщиком только как конкретный

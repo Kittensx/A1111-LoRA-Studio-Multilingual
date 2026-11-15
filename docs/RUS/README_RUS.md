@@ -215,8 +215,8 @@ v8 содержит весь предыдущий Studio и исправлени
 
 ```powershell
 python install.py verify
-python install.py check "D:\путь\к\A1111"
-python install.py install "D:\путь\к\A1111"
+python install.py check "<A1111_INSTALL_DIR>"
+python install.py install "<A1111_INSTALL_DIR>"
 ```
 
 На Colab используйте `/content/A1111` вместо Windows-пути. После установки
@@ -237,8 +237,8 @@ python install.py install "D:\путь\к\A1111"
 `.lora-studio-backups/<ID>`. Команды отката:
 
 ```powershell
-python install.py backups "D:\путь\к\A1111"
-python install.py rollback "D:\путь\к\A1111" ID
+python install.py backups "<A1111_INSTALL_DIR>"
+python install.py rollback "<A1111_INSTALL_DIR>" ID
 ```
 
 ## Проверки
@@ -256,7 +256,7 @@ python -B files/test/test_lora_studio_access.py
 ```
 
 Runtime-наборы используют уже установленный Torch и CPU. Ранее
-для него создано отдельное окружение `D:\AI-tools\lora-audit\venv` с
+для него создано отдельное окружение `<HISTORICAL_AUDIT_ROOT>/venv` с
 `torch 2.10.0+cpu`; кэш pip и временные файлы установки также находятся на D:.
 Это тестовое окружение, не полноценный venv A1111.
 
@@ -270,7 +270,7 @@ test_lora_studio_access.py использует уже установленны�
 Реальная генерация, пользовательские checkpoint/LoRA и обучение TI здесь не
 запускались. Для окончательной проверки нужен тот же SDXL в рабочей GPU-среде.
 Часть FP8/TI и LoRA/manual_cast проверена на CPU; до переноса идей из
-`D:\Users\Asus\Music\ВЕбы` остаются реальные внешние расширения, матрица версий,
+`<HISTORICAL_EXTENSIONS_DIR>` остаются реальные внешние расширения, матрица версий,
 GPU/checkpoint и настоящий Gradio (браузерный mock-стенд уже проверен).
 Обучение SDXL TI не добавлено: trainer выдаёт явное
 сообщение вместо позднего падения. Защита pickle не отключается; пакет обновляет

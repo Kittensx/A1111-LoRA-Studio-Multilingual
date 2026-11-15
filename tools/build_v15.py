@@ -6,9 +6,8 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 import install  # noqa: E402
+from _historical_build_paths import resolve_build_paths
 
-SOURCE = Path('D:/Users/Asus/Music/Musify/test/stable-diffusion-webui-dev')
-BEFORE = Path('D:/AI-tools/lora-audit/before-v15-independent')
 RUNTIME = ('modules/cache.py', 'modules/hashes.py', 'modules/options.py', 'modules/api/api.py',
            'extensions-builtin/Lora/network.py', 'extensions-builtin/Lora/networks.py',
            'javascript/loraStudioView.js')
@@ -18,7 +17,13 @@ TESTS = ('test/test_config_store.py', 'test/test_runtime_asset_identity.py',
 
 
 def main():
-    previous_root = ROOT.parent / 'A1111-LoRA-Studio-Pack-v14'
+
+    global ROOT, SOURCE, BEFORE
+    args = resolve_build_paths(15, needs_backup=True,
+                              previous='A1111-LoRA-Studio-Pack-v14',
+                              source_paths=(*RUNTIME, *TESTS), backup_paths=RUNTIME)
+    SOURCE, BEFORE, ROOT = args.source, args.backup, args.output
+    previous_root = args.base
     manifest = install.verify_package(previous_root)
     assets = {item['path']: item for item in manifest['assets']}
     operations = {item['path']: item for item in manifest['operations']}

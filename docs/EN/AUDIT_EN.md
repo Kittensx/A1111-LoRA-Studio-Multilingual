@@ -12,7 +12,7 @@ preserved: earlier FAIL and "not fixed" labels refer to v8/v9, not current
 code. These local tests do not replace generation using the user's files.
 
 Date: 2026-11-05, additional review following the v8 candidate release.
-Project: `D:\Users\Asus\Music\Musify\test\stable-diffusion-webui-dev`.
+Project: `<A1111_SOURCE>`.
 All relative source paths below refer to this project.
 
 ## Status after v9 fixes (2026-11-05)
@@ -47,7 +47,7 @@ acceptance remains incomplete.
 Runtime changes: networks.py, scripts/lora_script.py, new lora_studio_access.py,
 modules/textual_inversion/textual_inversion.py. VAE, UI code, default weights,
 and lyco_helpers.py were not changed. Backup:
-D:\AI-tools\lora-audit\before-20261105-a1-a5.
+<HISTORICAL_AUDIT_ROOT>/before-20261105-a1-a5.
 v8/ZIP were preserved. v9 installation requires a full WebUI restart.
 
 Next work: Gradio/GPU integration (including API-only, UI auth, mixed auth,
@@ -260,9 +260,9 @@ package directory, 23 PASS. These harness errors are not WebUI bugs.
 Reproduction commands (PowerShell, dependencies already installed):
 
 ```powershell
-$env:TEMP='D:\AI-tools\lora-audit\tmp'; $env:TMP=$env:TEMP
-& 'D:\AI-tools\lora-audit\venv\Scripts\python.exe' -B 'C:\Users\user\Documents\GPT\пров\reaudit_v8_20261105.py' 'D:\Users\Asus\Music\Musify\test\stable-diffusion-webui-dev'
-& 'C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe' -B 'C:\Users\user\Documents\GPT\пров\reaudit_studio_api_20261105.py' 'D:\Users\Asus\Music\Musify\test\stable-diffusion-webui-dev'
+$env:TEMP='<HISTORICAL_AUDIT_ROOT>/tmp'; $env:TMP=$env:TEMP
+& '<HISTORICAL_AUDIT_ROOT>/venv\Scripts\python.exe' -B '<HISTORICAL_AUDIT_SCRIPTS>/reaudit_v8_20261105.py' '<A1111_SOURCE>'
+& '<PYTHON_3_12>' -B '<HISTORICAL_AUDIT_SCRIPTS>/reaudit_studio_api_20261105.py' '<A1111_SOURCE>'
 ```
 
 ## Revised roadmap and completion criteria

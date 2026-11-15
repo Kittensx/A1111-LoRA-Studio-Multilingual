@@ -85,3 +85,12 @@ publishing, redistributing, or adapting the code. See the code review
 under `docs/EN/` for the current findings.
 
 **Contributions and corrections from the original developer are welcome.**
+
+### Portable setup and historical builds
+
+Use [`PORTABILITY_GUIDE_EN.md`](../docs/EN/PORTABILITY_GUIDE_EN.md) or
+[`PORTABILITY_GUIDE_RUS.md`](../docs/RUS/PORTABILITY_GUIDE_RUS.md) for
+portable checks and historical build options. The old build scripts are not the
+installer and require source/backup snapshots not included here. Historical
+`evidence/` and archived upstream ZIPs are retained unmodified for attribution
+and reproducibility; they are not current setup instructions.

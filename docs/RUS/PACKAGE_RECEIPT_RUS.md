@@ -21,7 +21,7 @@
 - Installer/header tests: 26 PASS, 1 SKIP (symlink недоступен текущему пользователю).
 - Ruff изменённых Python и Node syntax: PASS.
 
-Тестовый host: `D:/AI-tools/lora-audit/tmp/lora-v15-installed-kha0e4qa`.
+Тестовый host: `<HISTORICAL_AUDIT_ROOT>/tmp/lora-v15-installed-kha0e4qa`.
 База — локальный `stable-diffusion-webui-dev.zip` плюс `modules.zip`, не живая
 установка. 16 UNKNOWN разрешены только в этой новой тестовой копии. Логи находятся
 в `evidence/` пакета; промежуточные неуспешные UI-прогоны описаны в VERIFICATION.md.

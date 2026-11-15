@@ -1,0 +1,22 @@
+# Preserve exact bytes of installer-manifest assets on Windows, Linux, and GitHub.
+# install.py checks SHA-256, including whether files use CRLF or LF endings.
+# These paths are deliberately not subject to Git automatic EOL conversion.
+/LICENSE-A1111.txt -text
+/files/** -text
+/patches/** -text
+/reference-only/** -text
+# Keep language documentation at LF, including 12 optional SHA-256-verified files.
+/docs/** text eol=lf
+# Keep project tooling and documentation predictable across platforms.
+/.gitattributes text eol=lf
+/.gitignore text eol=lf
+/.github/** text eol=lf
+/*.py text eol=lf
+/*.json text eol=lf
+/*.md text eol=lf
+/*.bat text eol=crlf
+/tools/** text eol=lf
+/tests/** text eol=lf
+# Raw original evidence and upstream archives are never rewritten by Git.
+/evidence/** -text
+/archive/** -text

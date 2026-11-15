@@ -11,7 +11,7 @@
 не к текущему коду. Эти локальные тесты не заменяют генерацию на файлах пользователя.
 
 Дата: 2026-11-05, дополнительная проверка после выпуска кандидата v8.
-Проект: `D:\Users\Asus\Music\Musify\test\stable-diffusion-webui-dev`.
+Проект: `<A1111_SOURCE>`.
 Все относительные пути к исходникам ниже относятся к этому проекту.
 
 ## Статус после исправлений v9 (2026-11-05)
@@ -42,7 +42,7 @@
 
 Изменения runtime: networks.py, scripts/lora_script.py, новый lora_studio_access.py,
 modules/textual_inversion/textual_inversion.py. VAE, UI-код, default-веса и
-lyco_helpers.py не менялись. Backup: D:\AI-tools\lora-audit\before-20261105-a1-a5.
+lyco_helpers.py не менялись. Backup: <HISTORICAL_AUDIT_ROOT>/before-20261105-a1-a5.
 v8/ZIP сохранены. После установки v9 нужен полный restart WebUI.
 
 Следующие работы: Gradio/GPU integration (включая API-only, UI auth, mixed auth
@@ -246,9 +246,9 @@ NumPy loading сначала ошибочно запускался из отсу
 Команды воспроизведения (PowerShell, зависимости уже установлены):
 
 ```powershell
-$env:TEMP='D:\AI-tools\lora-audit\tmp'; $env:TMP=$env:TEMP
-& 'D:\AI-tools\lora-audit\venv\Scripts\python.exe' -B 'C:\Users\user\Documents\GPT\пров\reaudit_v8_20261105.py' 'D:\Users\Asus\Music\Musify\test\stable-diffusion-webui-dev'
-& 'C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe' -B 'C:\Users\user\Documents\GPT\пров\reaudit_studio_api_20261105.py' 'D:\Users\Asus\Music\Musify\test\stable-diffusion-webui-dev'
+$env:TEMP='<HISTORICAL_AUDIT_ROOT>/tmp'; $env:TMP=$env:TEMP
+& '<HISTORICAL_AUDIT_ROOT>/venv\Scripts\python.exe' -B '<HISTORICAL_AUDIT_SCRIPTS>/reaudit_v8_20261105.py' '<A1111_SOURCE>'
+& '<PYTHON_3_12>' -B '<HISTORICAL_AUDIT_SCRIPTS>/reaudit_studio_api_20261105.py' '<A1111_SOURCE>'
 ```
 
 ## Исправленная дорожная карта и условия завершения

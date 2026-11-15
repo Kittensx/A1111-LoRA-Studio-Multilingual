@@ -21,7 +21,7 @@ Checks on an actually installed, disposable test base:
 - Installer/header tests: 26 PASS, 1 SKIP (symlink unavailable to the current user).
 - Ruff checks on modified Python and Node syntax: PASS.
 
-Test host: `D:/AI-tools/lora-audit/tmp/lora-v15-installed-kha0e4qa`.
+Test host: `<HISTORICAL_AUDIT_ROOT>/tmp/lora-v15-installed-kha0e4qa`.
 The base was a local `stable-diffusion-webui-dev.zip` plus `modules.zip`, not a
 live installation. The 16 UNKNOWN entries were allowed only in this new test copy.
 Logs are in the package's `evidence/`; intermediate failed UI runs are described

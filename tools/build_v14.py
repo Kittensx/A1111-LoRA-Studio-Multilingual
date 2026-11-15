@@ -6,12 +6,16 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 import install  # noqa: E402
+from _historical_build_paths import resolve_build_paths
 
-SOURCE = Path('D:/Users/Asus/Music/Musify/test/stable-diffusion-webui-dev')
 CHANGED = ('extensions-builtin/Lora/networks.py', 'test/test_runtime_external_audit.py')
 
 
 def main():
+
+    global ROOT, SOURCE
+    args = resolve_build_paths(14, source_paths=CHANGED)
+    SOURCE, ROOT = args.source, args.output
     # The prior interrupted build may already have copied one changed asset.
     # Read the last valid manifest and verify only after all coupled hashes are
     # regenerated below; never install from this intermediate state.

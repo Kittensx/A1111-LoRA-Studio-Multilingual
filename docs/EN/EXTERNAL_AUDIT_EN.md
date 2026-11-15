@@ -9,7 +9,7 @@ Review completed: 2026-11-12. The source documents were read in full:
 
 Original attachments were not altered. Their recommendations were not treated
 as proof: actual functions in the working project and v11 payload were checked,
-and separate tests were added. The supplied reproducer hardcodes `/mnt/data/...`
+and separate tests were added. The supplied reproducer hardcodes `<TEMP_WORKSPACE>/...`
 for the second ZIP; rather than running it with incorrect paths, its scenarios
 were incorporated into local regressions.
 
@@ -22,7 +22,7 @@ In the first independent set of 14 checks on saved pre-fix code, 11 FAIL,
 wrong VAE selection, lost duplicates, stale caches, SDXL Create/Reload,
 and dict.shape in old emphasis were reproduced. These are not GPU error statistics.
 
-Backup: `D:\AI-tools\lora-audit\before-20261111-external-audit`.
+Backup: `<HISTORICAL_AUDIT_ROOT>/before-20261111-external-audit`.
 v10/v11 archives and directories are not overwritten. Fixes are applied to
 the working project and v12.
 
@@ -83,7 +83,7 @@ the working project and v12.
 ## Test installation, not just the files directory
 
 `tools/post_install_smoke.py` creates a new copy under
-D:\AI-tools\lora-audit\tmp from local
+<HISTORICAL_AUDIT_ROOT>/tmp from local
 `Downloads/stable-diffusion-webui-dev.zip` and `source/modules.zip`.
 This is the available, expanded local base with old REGION; it is not assumed
 to be identical to the archive from another party's audit. After installation,

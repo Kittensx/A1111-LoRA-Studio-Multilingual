@@ -3,7 +3,7 @@
 Test base: local `stable-diffusion-webui-dev.zip` overlaid with local
 `modules.zip`. This is not the same base composition as in the independent
 Linux audit. New copy:
-`D:/AI-tools/lora-audit/tmp/lora-v15-installed-kha0e4qa`.
+`<HISTORICAL_AUDIT_ROOT>/tmp/lora-v15-installed-kha0e4qa`.
 Log: `evidence/v15-installed-smoke-accepted.log`.
 
 - 142 Torch CPU runtime tests PASS, including eight new asset-identity
@@ -74,7 +74,7 @@ Node were used.
 - Rollback: 56 modified files restored/removed; original bytes of all affected
   paths verified, including absence of added files after rollback.
 - Preserved post-rollback test copy:
-  `D:\AI-tools\lora-audit\tmp\lora-v12-installed-xggld_54`.
+  `<HISTORICAL_AUDIT_ROOT>/tmp\lora-v12-installed-xggld_54`.
 - Installer/inspector: 27 methods, 26 PASS / 1 SKIP (OS disallows symlink).
   "Installation interrupted" during the intentional-failure test is expected.
 - `install.py check` of working project: 0 changes, 0 unrecognized; 110 assets,
@@ -91,7 +91,7 @@ checkpoint recovery messages in intentionally failing scenarios are expected.
 Reproduction (from v12 root; supply your own existing paths):
 
 ```text
-python -B tools/post_install_smoke.py --base-zip BASE.zip --modules-zip MODULES.zip --temp-root D:/AI-tools/lora-audit/tmp --torch-python D:/AI-tools/lora-audit/venv/Scripts/python.exe
+python -B tools/post_install_smoke.py --base-zip BASE.zip --modules-zip MODULES.zip --temp-root <HISTORICAL_AUDIT_ROOT>/tmp --torch-python <HISTORICAL_AUDIT_ROOT>/venv/Scripts/python.exe
 python -B -m unittest discover -s tests
 python -B install.py verify
 ```
@@ -214,7 +214,7 @@ was neither installed nor run; the pinned 3.41.2 auth/tokens contract was
 checked against official sources, and app.auth/app.tokens were mocked in tests.
 Do not claim verified integration with arbitrary Gradio versions or reverse proxies.
 
-Backup: D:\AI-tools\lora-audit\before-20261105-a1-a5.
+Backup: <HISTORICAL_AUDIT_ROOT>/before-20261105-a1-a5.
 v8 and ZIP were preserved intact. UI, VAE implementation, defaults, and
 lyco_helpers.py were unchanged. Nothing was installed. The independent TI test
 was updated for the new early refusal: actual production import with real
@@ -250,7 +250,7 @@ restored: explicit checkpoint reload is needed.
 New test_runtime_vae_failures.py: 3 methods covering seven mutation failure
 stages, preflight, success/no-op, and a low-VRAM service-double branch.
 Original runtime suite: 72 PASS. Node 17 PASS including 51 DOM assertions.
-No new dependencies. Backup: D:\AI-tools\lora-audit\before-20261105-vae-ui.
+No new dependencies. Backup: <HISTORICAL_AUDIT_ROOT>/before-20261105-vae-ui.
 
 Real browser at test/lora_studio_fixture.html: 55 PASS including four contrast
 modes. This is a mock-API fixture, not Gradio. UX gaps against the original
@@ -304,7 +304,7 @@ audit 5 PASS, parser/schema/presets 37 PASS, Node 17 PASS with 51 DOM assertions
 Ruff on modified Python PASS. Torch 2.10.0+cpu/Python 3.12.10; prior warnings
 about missing NumPy in the D: venv and pytest base_url remain.
 
-Pre-change backup: D:\AI-tools\lora-audit\before-20261104-state-io.
+Pre-change backup: <HISTORICAL_AUDIT_ROOT>/before-20261104-state-io.
 v6 and its ZIP were unchanged. UI/LoRA defaults/lyco_helpers.py unchanged.
 Nothing downloaded or installed. In-project plan updated.
 
@@ -371,7 +371,7 @@ system Python. Nothing was installed.
 ## v6 sources and restoration
 
 Sources already changed in the working project on D:. Pre-change snapshot:
-D:\AI-tools\lora-audit\before-20261104-edgecases.
+<HISTORICAL_AUDIT_ROOT>/before-20261104-edgecases.
 This is a separate direct backup; it is NOT an install.py journal ID.
 
 v6 is based on v5. v5 and its ZIP were preserved. processing.py remains a
@@ -454,7 +454,7 @@ had already passed before fixes. FP8 runtime was not changed in this step.
 
 Working project on D: was modified directly. Three runtime files and docs
 were saved before editing:
-D:\AI-tools\lora-audit\before-20261104-compat
+<HISTORICAL_AUDIT_ROOT>/before-20261104-compat
 
 v5 includes everything from v4, 80 verifiable assets and 58 install operations.
 New complete replacement modules/safe.py is permitted by the installer only

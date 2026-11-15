@@ -222,8 +222,8 @@ Stop WebUI. Run from this directory outside target A1111:
 
 ```powershell
 python install.py verify
-python install.py check "D:\path\to\A1111"
-python install.py install "D:\path\to\A1111"
+python install.py check "<A1111_INSTALL_DIR>"
+python install.py install "<A1111_INSTALL_DIR>"
 ```
 
 On Colab use `/content/A1111` in place of the Windows path. After installation,
@@ -244,8 +244,8 @@ WebUI, and automatically saves originals being modified to
 `.lora-studio-backups/<ID>`. Rollback commands:
 
 ```powershell
-python install.py backups "D:\path\to\A1111"
-python install.py rollback "D:\path\to\A1111" ID
+python install.py backups "<A1111_INSTALL_DIR>"
+python install.py rollback "<A1111_INSTALL_DIR>" ID
 ```
 
 ## Tests
@@ -263,7 +263,7 @@ python -B files/test/test_lora_studio_access.py
 ```
 
 Runtime suites use already installed Torch on CPU. A separate environment
-`D:\AI-tools\lora-audit\venv` with `torch 2.10.0+cpu` was created earlier;
+`<HISTORICAL_AUDIT_ROOT>/venv` with `torch 2.10.0+cpu` was created earlier;
 pip cache and temporary installation files also live on D:. It is a test
 environment, not a complete A1111 venv.
 
@@ -278,7 +278,7 @@ to work around a proxy error.
 Actual generation, user checkpoints/LoRAs, and TI training were not run here.
 Final acceptance requires the same SDXL in a working GPU environment.
 Some FP8/TI and LoRA/manual_cast were tested on CPU; before porting ideas from
-`D:\Users\Asus\Music\ВЕбы`, actual third-party extensions, version matrix,
+`<HISTORICAL_EXTENSIONS_DIR>`, actual third-party extensions, version matrix,
 GPU/checkpoint, and real Gradio remain to be checked (the browser mock fixture
 has already been tested).
 SDXL TI training was not added: the trainer now reports a clear message

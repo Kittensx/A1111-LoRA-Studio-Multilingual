@@ -238,7 +238,7 @@ The hook registry does not control third-party direct monkey-patches.
    with/without LoRA; CEB/Velvette; checkpoint A→B→A; failure then explicit retry.
 2. Validate external hooks and dependency versions. Do not upgrade all libraries
    together or disable safe deserialization to bypass compatibility problems.
-3. Inspect `D:/Users/Asus/Music/ВЕбы` for model lifecycle and patcher ideas after
+3. Inspect `<HISTORICAL_EXTENSIONS_DIR>` for model lifecycle and patcher ideas after
    these correctness fixes; port small tested contracts, not entire backends.
 4. Longer term: common hook ownership diagnostics, tensor cache separated from
    model-bound adapters, richer coverage UI, and GPU/browser CI.

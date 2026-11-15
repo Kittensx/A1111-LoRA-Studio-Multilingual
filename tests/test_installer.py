@@ -217,7 +217,7 @@ class InstallerTests(unittest.TestCase):
     def test_rollback_foreign_backup_and_bad_id_rejected(self):
         identifier = self.run_install()
         journal_path = self.target / install.BACKUPS / identifier / "journal.json"
-        journal = json.loads(journal_path.read_text())
+        journal = json.loads(journal_path.read_text(encoding="utf-8"))
         journal["target"] = str(self.base)
         self.write(journal_path, json.dumps(journal).encode())
         for backup_id in (identifier, "../escape", str(journal_path)):
@@ -227,7 +227,7 @@ class InstallerTests(unittest.TestCase):
     def test_tampered_journal_cannot_target_user_config(self):
         identifier = self.run_install()
         journal_path = self.target / install.BACKUPS / identifier / "journal.json"
-        journal = json.loads(journal_path.read_text())
+        journal = json.loads(journal_path.read_text(encoding="utf-8"))
         journal["entries"][0]["path"] = "config.json"
         self.write(journal_path, json.dumps(journal).encode())
         with self.assertRaises(install.InstallError):
@@ -243,7 +243,7 @@ class InstallerTests(unittest.TestCase):
         with patch.object(install, "atomic_write", fail), self.assertRaises(OSError):
             self.run_install()
         identifier = next((self.target / install.BACKUPS).iterdir()).name
-        journal = json.loads((self.target / install.BACKUPS / identifier / "journal.json").read_text())
+        journal = json.loads((self.target / install.BACKUPS / identifier / "journal.json").read_text(encoding="utf-8"))
         self.assertEqual(journal["status"], "interrupted")
         self.assertEqual(len(journal["entries"]), 3)
         self.assertEqual(install.rollback(self.target, identifier), 1)

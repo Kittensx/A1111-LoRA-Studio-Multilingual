@@ -2,8 +2,8 @@
 
 Date: 2026-11-11. This is a report on specific fixes, not a declaration that
 the entire plan is complete.
-Working project: `D:\Users\Asus\Music\Musify\test\stable-diffusion-webui-dev`.
-Backup before this pass: `D:\AI-tools\lora-audit\before-20261110-combinations`.
+Working project: `<A1111_SOURCE>`.
+Backup before this pass: `<HISTORICAL_AUDIT_ROOT>/before-20261110-combinations`.
 
 ## What was actually wrong
 
